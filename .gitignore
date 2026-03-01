@@ -1,0 +1,72 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+*.sqlite3
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+.venv
+
+# Media/Uploaded Files
+profile/
+transcripts/
+media/
+uploads/
+mooc/
+institutions/
+blog/
+
+# Static Files
+static/
+staticfiles/
+static_root/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Python
+*.py[cod]
+*.so
+.Python
+pip-log.txt
+db.sqlite3
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Django Migrations - Uncomment later after first commit
+# portfolio/migrations/
+# blog/migrations/
+# institutions/migrations/
+# mooc/migrations/
+
+# Secrets
+.env
+*.key
+*.pem
+secrets.json
+
+# Project specific exclusions
+khoka_portfolio/__pycache__/
+portfolio/__pycache__/
+blog/__pycache__/
+institutions/__pycache__/
+mooc/__pycache__/
