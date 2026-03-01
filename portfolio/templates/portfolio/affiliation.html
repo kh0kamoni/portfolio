@@ -1,0 +1,269 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Affiliations — Khokamoni{% endblock %}
+
+{% block content %}
+<!-- HERO ──────────────────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-handshake"></i>
+            Professional Connections
+        </div>
+        <h1 class="hero-name">Affiliations<br><em>& Appointments</em></h1>
+        <p class="hero-bio">
+            Academic positions, industrial training, and professional memberships
+            that complement my research and teaching journey.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-building-columns" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- AFFILIATION STATS ──────────────────────────────────── -->
+<div class="stats-row" style="margin-top: 2rem;">
+    <div class="stat-card glass">
+        <div class="stat-val">1</div>
+        <div class="stat-lbl">Academic<br>Positions</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">1</div>
+        <div class="stat-lbl">Industrial<br>Trainings</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">2</div>
+        <div class="stat-lbl">Professional<br>Memberships</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">3</div>
+        <div class="stat-lbl">Professional<br>Services</div>
+    </div>
+</div>
+
+<!-- ACADEMIC POSITIONS ─────────────────────────────────── -->
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Academic Appointments</p>
+    <h2 class="sec-title">Teaching Positions</h2>
+    
+    <div class="panel glass" style="padding: 2rem;">
+        <!-- Adjunct Faculty Position -->
+        <div style="margin-bottom: 2rem;">
+            <!-- Header with date -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--w-abyss); margin-bottom: 0.3rem;">
+                        Adjunct Faculty (Lecturer)
+                    </h3>
+                    <p style="font-size: 1rem; color: var(--w-depth); font-weight: 500;">
+                        Bangladesh University of Engineering and Technology (BUET)
+                    </p>
+                    <p style="font-size: 0.9rem; color: var(--w-teal);">
+                        <i class="fa-regular fa-building"></i> Department of Mechanical Engineering
+                    </p>
+                </div>
+                <span class="tl-date">
+                    <i class="fa-regular fa-calendar"></i> August 2024 – June 2025
+                </span>
+            </div>
+            
+            <!-- Description -->
+            <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+                Served as Adjunct Faculty in the Department of Mechanical Engineering, teaching undergraduate courses and mentoring students.
+            </p>
+
+            <!-- Courses Taught Section -->
+            <div style="margin-top: 1.8rem;">
+                <p class="sec-eye" style="margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.4rem;">
+                    <i class="fa-solid fa-book-open" style="color: var(--w-teal);"></i>
+                    Courses Conducted
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem;">
+                    <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.2rem; border: 1px solid rgba(255,255,255,0.7);">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+                            <span style="background: var(--w-teal); color: white; font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">ME 201</span>
+                            <span style="font-size: 0.7rem; color: var(--w-depth);">Undergraduate</span>
+                        </div>
+                        <p style="font-weight: 500; color: var(--w-abyss); margin-bottom: 0.3rem;">Thermodynamics</p>
+                        <p style="font-size: 0.75rem; color: var(--w-current);">
+                            <i class="fa-regular fa-calendar-clock"></i> Fall 2024
+                        </p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.2rem; border: 1px solid rgba(255,255,255,0.7);">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+                            <span style="background: var(--w-teal); color: white; font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">ME 202</span>
+                            <span style="font-size: 0.7rem; color: var(--w-depth);">Undergraduate</span>
+                        </div>
+                        <p style="font-weight: 500; color: var(--w-abyss); margin-bottom: 0.3rem;">Fluid Mechanics</p>
+                        <p style="font-size: 0.75rem; color: var(--w-current);">
+                            <i class="fa-regular fa-calendar-clock"></i> Spring 2025
+                        </p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.2rem; border: 1px solid rgba(255,255,255,0.7);">
+                        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+                            <span style="background: var(--w-teal); color: white; font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">ME 305</span>
+                            <span style="font-size: 0.7rem; color: var(--w-depth);">Undergraduate</span>
+                        </div>
+                        <p style="font-weight: 500; color: var(--w-abyss); margin-bottom: 0.3rem;">Heat Transfer</p>
+                        <p style="font-size: 0.75rem; color: var(--w-current);">
+                            <i class="fa-regular fa-calendar-clock"></i> Fall 2024
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INDUSTRIAL TRAININGS ───────────────────────────────── -->
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Professional Development</p>
+    <h2 class="sec-title">Industrial Training</h2>
+    
+    <div class="panel glass" style="padding: 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <!-- BITAC Training -->
+            <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.7);">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="width: 48px; height: 48px; border-radius: 1rem; background: linear-gradient(145deg, var(--w-shallow), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-industry" style="color: var(--w-depth); font-size: 1.3rem;"></i>
+                    </div>
+                    <div>
+                        <span class="pub-type" style="background: rgba(109,191,218,0.2);">Industrial Training</span>
+                        <p style="font-size: 0.75rem; color: var(--w-current); margin-top: 0.2rem;">
+                            <i class="fa-regular fa-calendar"></i> August 2024
+                        </p>
+                    </div>
+                </div>
+                
+                <h3 style="font-size: 1.1rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.3rem;">
+                    Intern for Industrial Training
+                </h3>
+                <p style="color: var(--w-depth); font-size: 0.9rem; margin-bottom: 0.8rem;">
+                    Bangladesh Industrial Technical Assistance Center (BITAC)
+                </p>
+                
+                <p style="font-size: 0.85rem; color: var(--w-current); line-height: 1.6; margin-bottom: 1rem;">
+                    A month long industrial training focused on Engineering application.
+                </p>
+                
+                <a href="#" class="btn btn-ghost" style="padding: 0.3rem 1rem; font-size: 0.75rem;">
+                    <i class="fa-regular fa-file-pdf"></i> Certificate
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROFESSIONAL SERVICES ──────────────────────────────── -->
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Service & Recognition</p>
+    <h2 class="sec-title">Professional Services</h2>
+    
+    <div class="panel glass" style="padding: 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+            <!-- Reviewer Service -->
+            <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.2rem; border: 1px solid rgba(255,255,255,0.7);">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem;">
+                    <div style="width: 36px; height: 36px; border-radius: 0.8rem; background: linear-gradient(145deg, var(--w-mid), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-regular fa-file-lines" style="color: var(--w-depth);"></i>
+                    </div>
+                    <div>
+                        <span class="pub-type" style="background: rgba(109,191,218,0.2); font-size: 0.65rem;">Reviewer</span>
+                    </div>
+                </div>
+                
+                <h3 style="font-weight: 600; color: var(--w-abyss); font-size: 1rem;">Journal Reviewer</h3>
+                <p style="color: var(--w-depth); font-size: 0.85rem;">Journal of Mechanical Engineering</p>
+                <p style="font-size: 0.7rem; color: var(--w-current); margin-top: 0.4rem;">
+                    <i class="fa-regular fa-calendar"></i> 2024 – Present
+                </p>
+            </div>
+            
+            <!-- Committee Member -->
+            <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.2rem; border: 1px solid rgba(255,255,255,0.7);">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem;">
+                    <div style="width: 36px; height: 36px; border-radius: 0.8rem; background: linear-gradient(145deg, var(--w-mid), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-users" style="color: var(--w-depth);"></i>
+                    </div>
+                    <div>
+                        <span class="pub-type" style="background: rgba(109,191,218,0.2); font-size: 0.65rem;">Committee</span>
+                    </div>
+                </div>
+                
+                <h3 style="font-weight: 600; color: var(--w-abyss); font-size: 1rem;">Conference Committee Member</h3>
+                <p style="color: var(--w-depth); font-size: 0.85rem;">ICME 2024</p>
+                <p style="font-size: 0.7rem; color: var(--w-current); margin-top: 0.4rem;">
+                    <i class="fa-regular fa-calendar"></i> 2024
+                </p>
+            </div>
+            
+            <!-- Advisory Board -->
+            <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.2rem; border: 1px solid rgba(255,255,255,0.7);">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem;">
+                    <div style="width: 36px; height: 36px; border-radius: 0.8rem; background: linear-gradient(145deg, var(--w-mid), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-chalkboard" style="color: var(--w-depth);"></i>
+                    </div>
+                    <div>
+                        <span class="pub-type" style="background: rgba(109,191,218,0.2); font-size: 0.65rem;">Board</span>
+                    </div>
+                </div>
+                
+                <h3 style="font-weight: 600; color: var(--w-abyss); font-size: 1rem;">Student Advisory Board</h3>
+                <p style="color: var(--w-depth); font-size: 0.85rem;">BUET Mechanical Engineering</p>
+                <p style="font-size: 0.7rem; color: var(--w-current); margin-top: 0.4rem;">
+                    <i class="fa-regular fa-calendar"></i> 2023 – 2024
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROFESSIONAL MEMBERSHIPS ───────────────────────────── -->
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Memberships</p>
+    <h2 class="sec-title">Professional Organizations</h2>
+    
+    <div class="panel glass" style="padding: 2rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+            <!-- ASME -->
+            <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.2rem 1.5rem; flex: 1 1 200px; border: 1px solid rgba(255,255,255,0.7); display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, var(--w-shallow), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-building" style="color: var(--w-depth);"></i>
+                </div>
+                <div>
+                    <p style="font-weight: 600; color: var(--w-abyss);">Student Member</p>
+                    <p style="color: var(--w-depth); font-size: 0.8rem;">ASME</p>
+                    <p style="font-size: 0.7rem; color: var(--w-current);">Since 2023</p>
+                </div>
+            </div>
+            
+            <!-- BSME -->
+            <div style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.2rem 1.5rem; flex: 1 1 200px; border: 1px solid rgba(255,255,255,0.7); display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, var(--w-shallow), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-building" style="color: var(--w-depth);"></i>
+                </div>
+                <div>
+                    <p style="font-weight: 600; color: var(--w-abyss);">Member</p>
+                    <p style="color: var(--w-depth); font-size: 0.8rem;">BSME</p>
+                    <p style="font-size: 0.7rem; color: var(--w-current);">Since 2022</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION ──────────────────────────────────── -->
+<section style="margin-top: 3rem; text-align: center;">
+    <div class="panel glass" style="padding: 2rem;">
+        <p style="font-size: 1.1rem; color: var(--w-depth); margin-bottom: 1rem;">
+            <i class="fa-regular fa-file-pdf"></i> 
+            Download complete affiliation and service record
+        </p>
+        <a href="#" class="btn btn-primary">
+            <i class="fa-regular fa-file-pdf"></i> Download Full CV
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,888 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+{% load portfolio_extras %} 
+
+{% block title %}Academics — Khokamoni {% endblock %}
+
+{% block content %}
+<!-- HERO ──────────────────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-graduation-cap"></i>
+            Educational Journey
+        </div>
+        <h1 class="hero-name">Academic<br><em>Background</em></h1>
+        <p class="hero-bio">
+            A track record of excellence in mechanical engineering education,
+            from primary schooling to current PhD research at Stanford.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-scroll" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- ACADEMIC HIGHLIGHTS ─────────────────────────────── -->
+<div class="stats-row" style="margin-top: 2rem;">
+    {% for highlight in highlights %}
+    <div class="stat-card glass">
+        <div class="stat-val">{{ highlight.value }}</div>
+        <div class="stat-lbl">{{ highlight.label }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- ALL DEGREES SECTION ───────────────────────────────── -->
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Academic Qualifications</p>
+    <h2 class="sec-title">Degrees & Certifications</h2>
+    
+    <!-- PhD Section - Bachelor's Degree Style -->
+    {% if phd %}
+    <div class="panel glass" style="padding: 2rem; margin-bottom: 2rem;">
+        <div class="academic-header">
+            <div class="academic-icon" style="background: {% if phd.institution.logo %}white{% else %}linear-gradient(145deg, var(--w-depth), var(--w-abyss)){% endif %};">
+                {% if phd.institution.logo %}
+                    <img src="{{ phd.institution.logo.url }}" alt="{{ phd.institution.name }}" class="circular-logo">
+                {% else %}
+                    <i class="fa-solid fa-graduation-cap" style="color: white; font-size: 2rem;"></i>
+                {% endif %}
+            </div>
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.2rem;">{{ phd.get_degree_type_display }}</p>
+                <h2 class="sec-title" style="margin-bottom: 0;">{{ phd.degree_name }}</h2>
+            </div>
+        </div>
+
+        <div class="academic-detail-card">
+            <div class="academic-info-grid">
+                <div>
+                    <p class="sec-eye" style="margin-bottom: 0.3rem;">Institution</p>
+                    <p class="academic-institution-name">{{ phd.institution.name }}</p>
+                    <p class="academic-field-study">{{ phd.field_of_study }}</p>
+                </div>
+                <div>
+                    <p class="sec-eye" style="margin-bottom: 0.3rem;">Duration</p>
+                    <p class="academic-duration">
+                        {{ phd.start_date|date:"Y" }} – 
+                        {% if phd.is_current %}Present{% else %}{{ phd.end_date|date:"Y" }}{% endif %}
+                    </p>
+                </div>
+            </div>
+
+             {% if phd.description %}
+            <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+                {{ phd.description }}
+            </p>
+            {% endif %}
+
+            {% if phd.achievements %}
+            <div style="margin-top: 1rem;">
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Achievements</p>
+                <p style="font-size: 0.9rem; color: var(--w-depth);">{{ phd.achievements }}</p>
+            </div>
+            {% endif %}
+
+            <br>
+
+            <!-- GPA Card -->
+            {% if phd.grade_value %}
+            <div class="academic-gpa-row">
+                <div class="academic-gpa-card">
+                    <p class="sec-eye" style="color: var(--w-teal);">GPA</p>
+                    <p class="academic-gpa-value">{{ phd.grade_value }}</p>
+                    <p class="academic-gpa-scale">/ {{ phd.grade_scale }}</p>
+                </div>
+                {% if phd.class_rank and phd.class_size %}
+                <div class="academic-rank-card">
+                    <p class="sec-eye" style="color: var(--w-depth);">Class Rank</p>
+                    <p class="academic-rank-value">{{ phd.class_rank }}</p>
+                    <p class="academic-rank-desc">out of {{ phd.class_size }} students</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- Achievement Badge -->
+            {% if phd.rank_percentile %}
+            <div class="academic-badge-container">
+                <span class="tag academic-badge">
+                    <i class="fa-solid fa-trophy" style="color: #ffd700;"></i>
+                    Top {{ phd.rank_percentile|floatformat:0 }}% of the Class
+                </span>
+            </div>
+            {% endif %}
+
+            <!-- {% if phd.description %}
+            <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+                {{ phd.description }}
+            </p>
+            {% endif %}
+
+            {% if phd.achievements %}
+            <div style="margin-top: 1rem;">
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Achievements</p>
+                <p style="font-size: 0.9rem; color: var(--w-depth);">{{ phd.achievements }}</p>
+            </div>
+            {% endif %} -->
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Primary (PSC) - PhD Style -->
+{% if psc %}
+<div class="panel glass" style="padding: 2rem; margin-bottom: 2rem;">
+    <div class="academic-header">
+        <div class="academic-icon" style="background: {% if psc.institution.logo %}white{% else %}linear-gradient(145deg, var(--w-depth), var(--w-abyss)){% endif %};">
+            {% if psc.institution.logo %}
+                <img src="{{ psc.institution.logo.url }}" alt="{{ psc.institution.name }}" class="circular-logo">
+            {% else %}
+                <i class="fa-solid fa-graduation-cap" style="color: white; font-size: 2rem;"></i>
+            {% endif %}
+        </div>
+        <div>
+            <p class="sec-eye" style="margin-bottom: 0.2rem;">{{ psc.get_degree_type_display }}</p>
+            <h2 class="sec-title" style="margin-bottom: 0;">{{ psc.degree_name }}</h2>
+        </div>
+    </div>
+
+    <div class="academic-detail-card">
+        <div class="academic-info-grid">
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Institution</p>
+                <p class="academic-institution-name">{{ psc.institution.name }}</p>
+                <p class="academic-field-study">{{ psc.field_of_study }}</p>
+            </div>
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Duration</p>
+                <p class="academic-duration">
+                    {{ psc.start_date|date:"Y" }} – 
+                    {% if psc.is_current %}Present{% else %}{{ psc.end_date|date:"Y" }}{% endif %}
+                </p>
+            </div>
+        </div>
+
+
+        {% if psc.description %}
+        <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+            {{ psc.description }}
+        </p>
+        {% endif %}
+
+        {% if psc.achievements %}
+        <div style="margin-top: 1rem;">
+            <p class="sec-eye" style="margin-bottom: 0.3rem;">Achievements</p>
+            <p style="font-size: 0.9rem; color: var(--w-depth);">{{ psc.achievements }}</p>
+        </div>
+        {% endif %}
+        <br>
+
+        <!-- GPA Card -->
+        {% if psc.grade_value %}
+        <div class="academic-gpa-row">
+            <div class="academic-gpa-card">
+                <p class="sec-eye" style="color: var(--w-teal);">GPA</p>
+                <p class="academic-gpa-value">{{ psc.grade_value }}</p>
+                <p class="academic-gpa-scale">/ {{ psc.grade_scale }}</p>
+            </div>
+            {% if psc.class_rank and psc.class_size %}
+            <div class="academic-rank-card">
+                <p class="sec-eye" style="color: var(--w-depth);">Class Rank</p>
+                <p class="academic-rank-value">{{ psc.class_rank }}</p>
+                <p class="academic-rank-desc">out of {{ psc.class_size }} students</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Achievement Badge -->
+        {% if psc.rank_percentile %}
+        <div class="academic-badge-container">
+            <span class="tag academic-badge">
+                <i class="fa-solid fa-trophy" style="color: #ffd700;"></i>
+                Top {{ psc.rank_percentile|floatformat:0 }}% of the Class
+            </span>
+        </div>
+        {% endif %}
+
+        
+    </div>
+</div>
+{% endif %}
+
+<!-- Junior School (JSC) - PhD Style -->
+{% if jsc %}
+<div class="panel glass" style="padding: 2rem; margin-bottom: 2rem;">
+    <div class="academic-header">
+        <div class="academic-icon" style="background: {% if jsc.institution.logo %}white{% else %}linear-gradient(145deg, var(--w-depth), var(--w-abyss)){% endif %};">
+            {% if jsc.institution.logo %}
+                <img src="{{ jsc.institution.logo.url }}" alt="{{ jsc.institution.name }}" class="circular-logo">
+            {% else %}
+                <i class="fa-solid fa-graduation-cap" style="color: white; font-size: 2rem;"></i>
+            {% endif %}
+        </div>
+        <div>
+            <p class="sec-eye" style="margin-bottom: 0.2rem;">{{ jsc.get_degree_type_display }}</p>
+            <h2 class="sec-title" style="margin-bottom: 0;">{{ jsc.degree_name }}</h2>
+        </div>
+    </div>
+
+    <div class="academic-detail-card">
+        <div class="academic-info-grid">
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Institution</p>
+                <p class="academic-institution-name">{{ jsc.institution.name }}</p>
+                <p class="academic-field-study">{{ jsc.field_of_study }}</p>
+            </div>
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Duration</p>
+                <p class="academic-duration">
+                    {{ jsc.start_date|date:"Y" }} – 
+                    {% if jsc.is_current %}Present{% else %}{{ jsc.end_date|date:"Y" }}{% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if jsc.description %}
+        <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+            {{ jsc.description }}
+        </p>
+        {% endif %}
+
+        {% if jsc.achievements %}
+        <div style="margin-top: 1rem;">
+            <p class="sec-eye" style="margin-bottom: 0.3rem;">Achievements</p>
+            <p style="font-size: 0.9rem; color: var(--w-depth);">{{ jsc.achievements }}</p>
+        </div>
+        {% endif %}
+        <br>
+
+        <!-- GPA Card -->
+        {% if jsc.grade_value %}
+        <div class="academic-gpa-row">
+            <div class="academic-gpa-card">
+                <p class="sec-eye" style="color: var(--w-teal);">GPA</p>
+                <p class="academic-gpa-value">{{ jsc.grade_value }}</p>
+                <p class="academic-gpa-scale">/ {{ jsc.grade_scale }}</p>
+            </div>
+            {% if jsc.class_rank and jsc.class_size %}
+            <div class="academic-rank-card">
+                <p class="sec-eye" style="color: var(--w-depth);">Class Rank</p>
+                <p class="academic-rank-value">{{ jsc.class_rank }}</p>
+                <p class="academic-rank-desc">out of {{ jsc.class_size }} students</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Achievement Badge -->
+        {% if jsc.rank_percentile %}
+        <div class="academic-badge-container">
+            <span class="tag academic-badge">
+                <i class="fa-solid fa-trophy" style="color: #ffd700;"></i>
+                Top {{ jsc.rank_percentile|floatformat:0 }}% of the Class
+            </span>
+        </div>
+        {% endif %}
+
+        
+    </div>
+</div>
+{% endif %}
+
+<!-- Secondary (SSC) - PhD Style -->
+{% if ssc %}
+<div class="panel glass" style="padding: 2rem; margin-bottom: 2rem;">
+    <div class="academic-header">
+        <div class="academic-icon" style="background: {% if ssc.institution.logo %}white{% else %}linear-gradient(145deg, var(--w-depth), var(--w-abyss)){% endif %};">
+            {% if ssc.institution.logo %}
+                <img src="{{ ssc.institution.logo.url }}" alt="{{ ssc.institution.name }}" class="circular-logo">
+            {% else %}
+                <i class="fa-solid fa-graduation-cap" style="color: white; font-size: 2rem;"></i>
+            {% endif %}
+        </div>
+        <div>
+            <p class="sec-eye" style="margin-bottom: 0.2rem;">{{ ssc.get_degree_type_display }}</p>
+            <h2 class="sec-title" style="margin-bottom: 0;">{{ ssc.degree_name }}</h2>
+        </div>
+    </div>
+
+    <div class="academic-detail-card">
+        <div class="academic-info-grid">
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Institution</p>
+                <p class="academic-institution-name">{{ ssc.institution.name }}</p>
+                <p class="academic-field-study">{{ ssc.field_of_study }}</p>
+            </div>
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Duration</p>
+                <p class="academic-duration">
+                    {{ ssc.start_date|date:"Y" }} – 
+                    {% if ssc.is_current %}Present{% else %}{{ ssc.end_date|date:"Y" }}{% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if ssc.description %}
+        <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+            {{ ssc.description }}
+        </p>
+        {% endif %}
+
+        {% if ssc.achievements %}
+        <div style="margin-top: 1rem;">
+            <p class="sec-eye" style="margin-bottom: 0.3rem;">Achievements</p>
+            <p style="font-size: 0.9rem; color: var(--w-depth);">{{ ssc.achievements }}</p>
+        </div>
+        {% endif %}
+        <br>
+
+        <!-- GPA Card -->
+        {% if ssc.grade_value %}
+        <div class="academic-gpa-row">
+            <div class="academic-gpa-card">
+                <p class="sec-eye" style="color: var(--w-teal);">GPA</p>
+                <p class="academic-gpa-value">{{ ssc.grade_value }}</p>
+                <p class="academic-gpa-scale">/ {{ ssc.grade_scale }}</p>
+            </div>
+            {% if ssc.class_rank and ssc.class_size %}
+            <div class="academic-rank-card">
+                <p class="sec-eye" style="color: var(--w-depth);">Class Rank</p>
+                <p class="academic-rank-value">{{ ssc.class_rank }}</p>
+                <p class="academic-rank-desc">out of {{ ssc.class_size }} students</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Achievement Badge -->
+        {% if ssc.rank_percentile %}
+        <div class="academic-badge-container">
+            <span class="tag academic-badge">
+                <i class="fa-solid fa-trophy" style="color: #ffd700;"></i>
+                Top {{ ssc.rank_percentile|floatformat:0 }}% of the Class
+            </span>
+        </div>
+        {% endif %}
+
+        
+    </div>
+</div>
+{% endif %}
+
+<!-- Higher Secondary (HSC) - PhD Style -->
+{% if hsc %}
+<div class="panel glass" style="padding: 2rem; margin-bottom: 2rem;">
+    <div class="academic-header">
+        <div class="academic-icon" style="background: {% if hsc.institution.logo %}white{% else %}linear-gradient(145deg, var(--w-depth), var(--w-abyss)){% endif %};">
+            {% if hsc.institution.logo %}
+                <img src="{{ hsc.institution.logo.url }}" alt="{{ hsc.institution.name }}" class="circular-logo">
+            {% else %}
+                <i class="fa-solid fa-graduation-cap" style="color: white; font-size: 2rem;"></i>
+            {% endif %}
+        </div>
+        <div>
+            <p class="sec-eye" style="margin-bottom: 0.2rem;">{{ hsc.get_degree_type_display }}</p>
+            <h2 class="sec-title" style="margin-bottom: 0;">{{ hsc.degree_name }}</h2>
+        </div>
+    </div>
+
+    <div class="academic-detail-card">
+        <div class="academic-info-grid">
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Institution</p>
+                <p class="academic-institution-name">{{ hsc.institution.name }}</p>
+                <p class="academic-field-study">{{ hsc.field_of_study }}</p>
+            </div>
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Duration</p>
+                <p class="academic-duration">
+                    {{ hsc.start_date|date:"Y" }} – 
+                    {% if hsc.is_current %}Present{% else %}{{ hsc.end_date|date:"Y" }}{% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if hsc.description %}
+        <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+            {{ hsc.description }}
+        </p>
+        {% endif %}
+
+        {% if hsc.achievements %}
+        <div style="margin-top: 1rem;">
+            <p class="sec-eye" style="margin-bottom: 0.3rem;">Achievements</p>
+            <p style="font-size: 0.9rem; color: var(--w-depth);">{{ hsc.achievements }}</p>
+        </div>
+        {% endif %}
+
+        <br>
+
+        <!-- GPA Card -->
+        {% if hsc.grade_value %}
+        <div class="academic-gpa-row">
+            <div class="academic-gpa-card">
+                <p class="sec-eye" style="color: var(--w-teal);">GPA</p>
+                <p class="academic-gpa-value">{{ hsc.grade_value }}</p>
+                <p class="academic-gpa-scale">/ {{ hsc.grade_scale }}</p>
+            </div>
+            {% if hsc.class_rank and hsc.class_size %}
+            <div class="academic-rank-card">
+                <p class="sec-eye" style="color: var(--w-depth);">Class Rank</p>
+                <p class="academic-rank-value">{{ hsc.class_rank }}</p>
+                <p class="academic-rank-desc">out of {{ hsc.class_size }} students</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Achievement Badge -->
+        {% if hsc.rank_percentile %}
+        <div class="academic-badge-container">
+            <span class="tag academic-badge">
+                <i class="fa-solid fa-trophy" style="color: #ffd700;"></i>
+                Top {{ hsc.rank_percentile|floatformat:0 }}% of the Class
+            </span>
+        </div>
+        {% endif %}
+
+        
+    </div>
+</div>
+{% endif %}
+
+<!-- Bachelors Section - PhD Style -->
+{% if bachelors %}
+<div class="panel glass" style="padding: 2rem; margin-bottom: 2rem;">
+    <div class="academic-header">
+        <div class="academic-icon" style="background: {% if bachelors.institution.logo %}white{% else %}linear-gradient(145deg, var(--w-depth), var(--w-abyss)){% endif %};">
+            {% if bachelors.institution.logo %}
+                <img src="{{ bachelors.institution.logo.url }}" alt="{{ bachelors.institution.name }}" class="circular-logo">
+            {% else %}
+                <i class="fa-solid fa-graduation-cap" style="color: white; font-size: 2rem;"></i>
+            {% endif %}
+        </div>
+        <div>
+            <p class="sec-eye" style="margin-bottom: 0.2rem;">{{ bachelors.get_degree_type_display }}</p>
+            <h2 class="sec-title" style="margin-bottom: 0;">{{ bachelors.degree_name }}</h2>
+        </div>
+    </div>
+
+    <div class="academic-detail-card">
+        <div class="academic-info-grid">
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Institution</p>
+                <p class="academic-institution-name">{{ bachelors.institution.name }}</p>
+                <p class="academic-field-study">{{ bachelors.field_of_study }}</p>
+            </div>
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Duration</p>
+                <p class="academic-duration">
+                    {{ bachelors.start_date|date:"Y" }} – 
+                    {% if bachelors.is_current %}Present{% else %}{{ bachelors.end_date|date:"Y" }}{% endif %}
+                </p>
+            </div>
+        </div>
+
+        {% if bachelors.description %}
+        <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+            {{ bachelors.description }}
+        </p>
+        {% endif %}
+
+        {% if bachelors.achievements %}
+        <div style="margin-top: 1rem;">
+            <p class="sec-eye" style="margin-bottom: 0.3rem;">Achievements</p>
+            <p style="font-size: 0.9rem; color: var(--w-depth);">{{ bachelors.achievements }}</p>
+        </div>
+        {% endif %}
+
+        
+        <!-- Key Courses -->
+        {% with courses=courses_by_degree|get_item:bachelors.id %}
+        {% if courses %}
+        <div style="margin-top: 1.5rem;">
+            <p class="sec-eye" style="margin-bottom: 0.8rem;">Relevant Coursework</p>
+            <div class="chips">
+                {% for course in courses %}
+                <span class="chip">{{ course.course_name }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endwith %}
+        <br>
+        <!-- GPA Card -->
+        {% if bachelors.grade_value %}
+        <div class="academic-gpa-row">
+            <div class="academic-gpa-card">
+                <p class="sec-eye" style="color: var(--w-teal);">GPA</p>
+                <p class="academic-gpa-value">{{ bachelors.grade_value }}</p>
+                <p class="academic-gpa-scale">/ {{ bachelors.grade_scale }}</p>
+            </div>
+            {% if bachelors.class_rank and bachelors.class_size %}
+            <div class="academic-rank-card">
+                <p class="sec-eye" style="color: var(--w-depth);">Class Rank</p>
+                <p class="academic-rank-value">{{ bachelors.class_rank }}</p>
+                <p class="academic-rank-desc">out of {{ bachelors.class_size }} students</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Achievement Badge -->
+        {% if bachelors.rank_percentile %}
+        <div class="academic-badge-container">
+            <span class="tag academic-badge">
+                <i class="fa-solid fa-trophy" style="color: #ffd700;"></i>
+                Top {{ bachelors.rank_percentile|floatformat:0 }}% of the Class
+            </span>
+        </div>
+        {% endif %}
+
+        
+        
+        
+    </div>
+</div>
+{% endif %}
+
+<!-- Masters Section - PhD Style -->
+{% if masters %}
+<div class="panel glass" style="padding: 2rem; margin-bottom: 2rem;">
+    <div class="academic-header">
+        <div class="academic-icon" style="background: {% if masters.institution.logo %}white{% else %}linear-gradient(145deg, var(--w-depth), var(--w-abyss)){% endif %};">
+            {% if masters.institution.logo %}
+                <img src="{{ masters.institution.logo.url }}" alt="{{ masters.institution.name }}" class="circular-logo">
+            {% else %}
+                <i class="fa-solid fa-graduation-cap" style="color: white; font-size: 2rem;"></i>
+            {% endif %}
+        </div>
+        <div>
+            <p class="sec-eye" style="margin-bottom: 0.2rem;">{{ masters.get_degree_type_display }}</p>
+            <h2 class="sec-title" style="margin-bottom: 0;">{{ masters.degree_name }}</h2>
+        </div>
+    </div>
+
+    <div class="academic-detail-card">
+        <div class="academic-info-grid">
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Institution</p>
+                <p class="academic-institution-name">{{ masters.institution.name }}</p>
+                <p class="academic-field-study">{{ masters.field_of_study }}</p>
+            </div>
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Duration</p>
+                <p class="academic-duration">
+                    {{ masters.start_date|date:"Y" }} – 
+                    {% if masters.is_current %}Present{% else %}{{ masters.end_date|date:"Y" }}{% endif %}
+                </p>
+            </div>
+        </div>
+
+         {% if masters.description %}
+        <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.7; margin: 1rem 0;">
+            {{ masters.description }}
+        </p>
+        {% endif %}
+
+        {% if masters.achievements %}
+        <div style="margin-top: 1rem;">
+            <p class="sec-eye" style="margin-bottom: 0.3rem;">Achievements</p>
+            <p style="font-size: 0.9rem; color: var(--w-depth);">{{ masters.achievements }}</p>
+        </div>
+        {% endif %}
+
+        <br>
+
+        <!-- GPA Card -->
+        {% if masters.grade_value %}
+        <div class="academic-gpa-row">
+            <div class="academic-gpa-card">
+                <p class="sec-eye" style="color: var(--w-teal);">GPA</p>
+                <p class="academic-gpa-value">{{ masters.grade_value }}</p>
+                <p class="academic-gpa-scale">/ {{ masters.grade_scale }}</p>
+            </div>
+            {% if masters.class_rank and masters.class_size %}
+            <div class="academic-rank-card">
+                <p class="sec-eye" style="color: var(--w-depth);">Class Rank</p>
+                <p class="academic-rank-value">{{ masters.class_rank }}</p>
+                <p class="academic-rank-desc">out of {{ masters.class_size }} students</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Achievement Badge -->
+        {% if masters.rank_percentile %}
+        <div class="academic-badge-container">
+            <span class="tag academic-badge">
+                <i class="fa-solid fa-trophy" style="color: #ffd700;"></i>
+                Top {{ masters.rank_percentile|floatformat:0 }}% of the Class
+            </span>
+        </div>
+        {% endif %}
+
+       
+    </div>
+</div>
+{% endif %}
+</section>
+
+<!-- ACADEMIC TIMELINE ──────────────────────────────────── -->
+<section style="margin-top: 2rem;">
+    <div class="panel glass">
+        <p class="sec-eye">Journey</p>
+        <h2 class="sec-title">Complete Academic Timeline</h2>
+        
+        <div class="timeline-container">
+            <!-- Timeline line -->
+            <div class="timeline-line"></div>
+            
+            <!-- Timeline items -->
+            <div class="timeline-items">
+                {% for degree in degrees %}
+                <div class="timeline-item">
+                    <div class="timeline-marker 
+                        {% if degree.is_current %}timeline-marker-current
+                        {% elif degree.degree_type == 'phd' %}timeline-marker-phd
+                        {% elif degree.degree_type == 'masters' %}timeline-marker-masters
+                        {% elif degree.degree_type == 'bachelors' %}timeline-marker-bachelors
+                        {% else %}timeline-marker-other{% endif %}">
+                    </div>
+                    <span class="tl-date {% if degree.is_current %}current-date{% endif %}">
+                        {{ degree.start_date|date:"Y" }} – 
+                        {% if degree.is_current %}Present{% else %}{{ degree.end_date|date:"Y" }}{% endif %}
+                    </span>
+                    <div class="timeline-content">
+                        <p class="timeline-title">{{ degree.degree_name }}</p>
+                        <p class="timeline-subtitle">{{ degree.institution.name }} · {{ degree.field_of_study }}</p>
+                        {% if degree.grade_value %}
+                        <p class="timeline-grade">
+                            GPA: {{ degree.grade_value }}/{{ degree.grade_scale }}
+                            {% if degree.class_rank %} · Rank: {{ degree.class_rank }}/{{ degree.class_size }}{% endif %}
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .academic-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .academic-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(13,92,118,0.15);
+        border: 2px solid rgba(255,255,255,0.8);
+        flex-shrink: 0;
+    }
+    
+    .academic-icon i {
+        font-size: 2rem;
+        color: var(--w-depth);
+    }
+    
+    .circular-logo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    
+    .academic-detail-card {
+        background: rgba(255,255,255,0.3);
+        border-radius: var(--radius-md);
+        padding: 2rem;
+        border: 1px solid rgba(255,255,255,0.8);
+    }
+    
+    .academic-info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .academic-institution-name {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--w-depth);
+    }
+    
+    .academic-field-study {
+        color: var(--w-current);
+        margin-top: 0.3rem;
+    }
+    
+    .academic-duration {
+        font-size: 1.1rem;
+        color: var(--w-depth);
+    }
+    
+    .academic-gpa-row {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    .academic-gpa-card {
+        flex: 1;
+        min-width: 200px;
+        background: rgba(109,191,218,0.1);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        text-align: center;
+        border: 1px solid rgba(109,191,218,0.3);
+    }
+    
+    .academic-gpa-value {
+        font-family: 'DM Serif Display', serif;
+        font-size: 3.5rem;
+        font-weight: 400;
+        color: var(--w-depth);
+        line-height: 1;
+    }
+    
+    .academic-gpa-scale {
+        color: var(--w-current);
+    }
+    
+    .academic-rank-card {
+        flex: 1;
+        min-width: 200px;
+        background: rgba(13,92,118,0.05);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        text-align: center;
+        border: 1px solid rgba(13,92,118,0.2);
+    }
+    
+    .academic-rank-value {
+        font-family: 'DM Serif Display', serif;
+        font-size: 3.5rem;
+        font-weight: 400;
+        color: var(--w-depth);
+        line-height: 1;
+    }
+    
+    .academic-rank-desc {
+        color: var(--w-current);
+    }
+    
+    .academic-badge-container {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .academic-badge {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.5rem;
+        background: linear-gradient(145deg, rgba(109,191,218,0.2), rgba(13,92,118,0.1));
+    }
+    
+    .timeline-container {
+        position: relative;
+        padding: 1rem 0;
+    }
+    
+    .timeline-line {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--w-teal), var(--w-depth));
+        opacity: 0.3;
+    }
+    
+    .timeline-items {
+        position: relative;
+        padding-left: 50px;
+    }
+    
+    .timeline-item {
+        margin-bottom: 2rem;
+    }
+    
+    .timeline-marker {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        position: absolute;
+        left: 15px;
+    }
+    
+    .timeline-marker-current {
+        background: var(--w-depth);
+        box-shadow: 0 0 0 3px rgba(13,92,118,0.2);
+    }
+    
+    .timeline-marker-phd {
+        background: var(--w-depth);
+        box-shadow: 0 0 0 3px rgba(13,92,118,0.2);
+    }
+    
+    .timeline-marker-masters {
+        background: var(--w-teal);
+        box-shadow: 0 0 0 3px rgba(109,191,218,0.3);
+    }
+    
+    .timeline-marker-bachelors {
+        background: var(--w-teal);
+        box-shadow: 0 0 0 3px rgba(109,191,218,0.3);
+    }
+    
+    .timeline-marker-other {
+        background: var(--w-mid);
+        box-shadow: 0 0 0 3px rgba(184,228,244,0.4);
+    }
+    
+    .timeline-content {
+        background: rgba(255,255,255,0.3);
+        border-radius: var(--radius-md);
+        padding: 1.2rem;
+        margin-left: 0;
+    }
+    
+    .timeline-title {
+        font-weight: 600;
+        color: var(--w-abyss);
+    }
+    
+    .timeline-subtitle {
+        color: var(--w-current);
+    }
+    
+    .timeline-grade {
+        font-size: 0.85rem;
+        color: var(--w-teal);
+        margin-top: 0.3rem;
+    }
+    
+    .current-date {
+        background: var(--w-depth);
+        color: white;
+    }
+</style>
+{% endblock %}

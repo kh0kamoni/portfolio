@@ -1,0 +1,64 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Research — Khokamoni{% endblock %}
+
+{% block content %}
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-microscope"></i>
+            Research Program
+        </div>
+        <h1 class="hero-name">Research<br><em>Interests</em></h1>
+        <p class="hero-bio">
+            My research lies at the intersection of energy storage mechanics, 
+            thermofluid sciences, and computational modeling. I develop 
+            reduced-order models and multi-scale simulations to understand 
+            and optimize next-generation energy systems.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-flask" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- Full Research Grid -->
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Focus Areas</p>
+    <h2 class="sec-title">Current Research Directions</h2>
+    <div class="research-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        {% for area in research_areas %}
+        <div class="res-card glass" style="padding: 2rem 1.5rem;">
+            <div class="res-icon"><i class="{{ area.icon_class }}"></i></div>
+            <h4>{{ area.title }}</h4>
+            <p>{{ area.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Research Statement -->
+<section style="margin-top: 3rem;">
+    <div class="panel glass">
+        <p class="sec-eye">Research Statement</p>
+        <h3 class="sec-title" style="font-size: 1.2rem; margin-bottom: 1rem;">Towards Sustainable Energy Storage</h3>
+        <p style="font-size: 0.96rem; line-height: 1.8; color: #1e5469; margin-bottom: 1.5rem;">
+            My research focuses on developing predictive models for next-generation 
+            energy storage systems. By combining physics-based simulations with 
+            machine learning, I aim to accelerate the discovery and optimization 
+            of materials for batteries and thermal energy storage. Current projects 
+            include reduced-order modeling of lithium-ion battery degradation, 
+            multi-scale analysis of solid-state electrolytes, and data-driven 
+            approaches for thermofluid prediction.
+        </p>
+        <div class="chips" style="margin-top: 1rem;">
+            <span class="chip">#EnergyStorage</span>
+            <span class="chip">#ComputationalModeling</span>
+            <span class="chip">#MachineLearning</span>
+            <span class="chip">#Thermofluids</span>
+            <span class="chip">#MaterialsScience</span>
+        </div>
+    </div>
+</section>
+{% endblock %}

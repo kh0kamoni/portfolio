@@ -1,0 +1,182 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Blog — Khokamoni{% endblock %}
+
+{% block content %}
+<!-- HERO ──────────────────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-pen-fancy"></i>
+            Academic Blog
+        </div>
+        <h1 class="hero-name">Research<br><em>Insights</em></h1>
+        <p class="hero-bio">
+            Thoughts, tutorials, and updates on computational mechanics, 
+            energy storage, and scientific computing. A space for sharing 
+            knowledge and engaging with the research community.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-feather" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- BLOG STATS ──────────────────────────────────── -->
+<div class="stats-row" style="margin-top: 2rem;">
+    <div class="stat-card glass">
+        <div class="stat-val">{{ posts.count }}</div>
+        <div class="stat-lbl">Total<br>Posts</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">{{ categories.count }}</div>
+        <div class="stat-lbl">Categories</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">{{ tags.count }}</div>
+        <div class="stat-lbl">Topics</div>
+    </div>
+    <div class="stat-card glass">
+         <div class="stat-val">{{ total_views }}</div>
+        <div class="stat-lbl">Total<br>Views</div>
+    </div>
+</div>
+
+<!-- BLOG LAYOUT ──────────────────────────────────── -->
+<div class="two-col" style="margin-top: 2rem;">
+    <!-- Main Content - Blog Posts -->
+    <div style="grid-column: span 2;">
+        <!-- Search and Filter Bar -->
+        <div class="panel glass" style="padding: 1.2rem; margin-bottom: 2rem;">
+            <form method="get" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <input type="text" name="q" placeholder="Search posts..." value="{{ request.GET.q }}" style="flex: 1; padding: 0.6rem 1rem; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5); font-family: 'DM Sans', sans-serif;">
+                <button type="submit" class="btn btn-ghost" style="padding: 0.4rem 1.5rem;">
+                    <i class="fa-solid fa-search"></i> Search
+                </button>
+            </form>
+        </div>
+
+        <!-- Featured Posts -->
+        {% if featured_posts and not request.GET %}
+        <div style="margin-bottom: 3rem;">
+            <p class="sec-eye">Featured</p>
+            <h2 class="sec-title">Highlighted Articles</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                {% for post in featured_posts %}
+                <div class="blog-card featured" style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255,255,255,0.8);">
+                    {% if post.featured_image %}
+                    <div style="height: 180px; overflow: hidden;">
+                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    {% else %}
+                    <div style="height: 180px; background: linear-gradient(145deg, var(--w-teal), var(--w-depth)); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-solid fa-scroll" style="font-size: 3rem; color: white; opacity: 0.5;"></i>
+                    </div>
+                    {% endif %}
+                    
+                    <div style="padding: 1.5rem;">
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.8rem; flex-wrap: wrap;">
+                            {% for category in post.categories.all|slice:":2" %}
+                            <span class="pub-type" style="background: rgba(109,191,218,0.2);">{{ category.name }}</span>
+                            {% endfor %}
+                        </div>
+                        <h3 style="font-size: 1.1rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.5rem;">
+                            <a href="{% url 'blog_detail' post.slug %}" style="text-decoration: none; color: inherit;">{{ post.title }}</a>
+                        </h3>
+                        <p style="font-size: 0.85rem; color: var(--w-current); margin-bottom: 1rem;">{{ post.excerpt|truncatechars:100 }}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.75rem; color: var(--w-teal);">
+                                <i class="fa-regular fa-clock"></i> {{ post.published_date|date:"M d, Y" }}
+                            </span>
+                            <a href="{% url 'blog_detail' post.slug %}" class="btn btn-ghost" style="padding: 0.3rem 1rem; font-size: 0.75rem;">Read →</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- All Posts -->
+        <div>
+            <p class="sec-eye">Latest</p>
+            <h2 class="sec-title">Recent Posts</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                {% for post in posts %}
+                <div class="blog-post-item" style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.8);">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        {% if post.featured_image %}
+                        <div style="width: 120px; height: 120px; border-radius: var(--radius-md); overflow: hidden;">
+                            <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        {% endif %}
+                        <div style="flex: 1;">
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+                                <span class="pub-type" style="background: rgba(109,191,218,0.2);">{{ post.get_post_type_display }}</span>
+                                {% for category in post.categories.all|slice:":2" %}
+                                <span class="pub-type" style="background: rgba(184,228,244,0.4);">{{ category.name }}</span>
+                                {% endfor %}
+                            </div>
+                            <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.3rem;">
+                                <a href="{% url 'blog_detail' post.slug %}" style="text-decoration: none; color: inherit;">{{ post.title }}</a>
+                            </h3>
+                            <p style="font-size: 0.9rem; color: var(--w-depth); margin-bottom: 0.3rem;">{{ post.author.get_full_name|default:post.author.username }}</p>
+                            <p style="font-size: 0.85rem; color: var(--w-current); margin-bottom: 0.8rem;">{{ post.excerpt|truncatechars:120 }}</p>
+                            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                <span style="font-size: 0.75rem; color: var(--w-teal);">
+                                    <i class="fa-regular fa-calendar"></i> {{ post.published_date|date:"M d, Y" }}
+                                </span>
+                                <span style="font-size: 0.75rem; color: var(--w-current);">
+                                    <i class="fa-regular fa-clock"></i> {{ post.reading_time_minutes }} min read
+                                </span>
+                                <span style="font-size: 0.75rem; color: var(--w-current);">
+                                    <i class="fa-regular fa-eye"></i> {{ post.views }} views
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="color: var(--w-current); text-align: center; padding: 3rem;">No blog posts yet.</p>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="pagination" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="page-link">← Previous</a>
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="page-current">{{ num }}</span>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="page-link">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="page-link">Next →</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .blog-card, .blog-post-item {
+        transition: var(--trans);
+    }
+    .blog-card:hover, .blog-post-item:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-hover);
+    }
+    .blog-card.featured {
+        border-left: 4px solid var(--w-depth);
+    }
+</style>
+{% endblock %}

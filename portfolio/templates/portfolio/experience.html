@@ -1,0 +1,104 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Experience — Khokamoni{% endblock %}
+
+{% block content %}
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-briefcase"></i>
+            Background
+        </div>
+        <h1 class="hero-name">Experience<br><em>& Education</em></h1>
+        <p class="hero-bio">
+            Academic and professional journey in mechanical engineering, 
+            from undergraduate studies at BUET to PhD research at Stanford.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-graduation-cap" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- Timeline -->
+<section style="margin-top: 3rem;">
+    <div class="two-col">
+        <!-- Experience Column -->
+        <div>
+            <p class="sec-eye">Professional Journey</p>
+            <h2 class="sec-title">Work & Education</h2>
+            <div class="panel glass">
+                <ul class="timeline">
+                    {% for exp in experiences %}
+                    <li class="tl-row">
+                        <div class="tl-marker"></div>
+                        <div class="tl-body">
+                            <p class="tl-role">{{ exp.title }}</p>
+                            <p class="tl-org">{{ exp.organization }}</p>
+                            {% if exp.description %}
+                            <p style="font-size: 0.75rem; color: var(--w-current); margin-top: 0.2rem;">
+                                {{ exp.description }}
+                            </p>
+                            {% endif %}
+                        </div>
+                        <span class="tl-date">
+                            {% if exp.current %}
+                                {{ exp.start_date|date:"Y" }} – Now
+                            {% else %}
+                                {{ exp.start_date|date:"Y" }} – {{ exp.end_date|date:"Y" }}
+                            {% endif %}
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Skills Column -->
+        <div>
+            <p class="sec-eye">Expertise</p>
+            <h2 class="sec-title">Skills & Tools</h2>
+            <div class="panel glass">
+                {% regroup skills by category as skill_categories %}
+                {% for category in skill_categories %}
+                <div style="margin-bottom: 1.5rem;">
+                    <p class="sec-eye" style="margin-bottom: 0.5rem;">{{ category.grouper }}</p>
+                    <div class="chips">
+                        {% for skill in category.list %}
+                        <span class="chip">{{ skill.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Teaching Experience -->
+            <div style="margin-top: 1.5rem;">
+                <p class="sec-eye">Teaching</p>
+                <h2 class="sec-title">Mentorship</h2>
+                <div class="panel glass">
+                    <ul class="timeline">
+                        <li class="tl-row">
+                            <div class="tl-marker"></div>
+                            <div class="tl-body">
+                                <p class="tl-role">Undergraduate Research Mentor</p>
+                                <p class="tl-org">Stanford University</p>
+                            </div>
+                            <span class="tl-date">2024</span>
+                        </li>
+                        <li class="tl-row">
+                            <div class="tl-marker"></div>
+                            <div class="tl-body">
+                                <p class="tl-role">Teaching Assistant - Thermodynamics</p>
+                                <p class="tl-org">BUET</p>
+                            </div>
+                            <span class="tl-date">2015</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

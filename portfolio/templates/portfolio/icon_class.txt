@@ -1,0 +1,546 @@
+Here's a comprehensive list of Font Awesome icon classes organized by category, perfect for your research areas:
+
+## 🎓 **Academic & Education Icons**
+```
+fa-solid fa-graduation-cap        // Graduation cap
+fa-solid fa-book                   // Book
+fa-solid fa-book-open              // Open book
+fa-solid fa-bookmark               // Bookmark
+fa-solid fa-pen                    // Pen
+fa-solid fa-pencil                 // Pencil
+fa-solid fa-feather                // Feather (writing)
+fa-solid fa-scroll                 // Scroll (ancient document)
+fa-solid fa-file-lines             // Document
+fa-solid fa-file-pdf               // PDF file
+fa-solid fa-newspaper              // Newspaper
+fa-solid fa-atom                   // Atom (science)
+fa-solid fa-flask                  // Flask (chemistry)
+fa-solid fa-microscope             // Microscope
+fa-solid fa-dna                    // DNA
+fa-solid fa-brain                  // Brain
+fa-solid fa-calculator             // Calculator
+fa-solid fa-square-root-variable   // Square root
+fa-solid fa-chart-line             // Line chart
+fa-solid fa-chart-bar              // Bar chart
+fa-solid fa-chart-pie              // Pie chart
+fa-solid fa-chart-simple           // Simple chart
+```
+
+## ⚡ **Energy & Power Icons**
+```
+fa-solid fa-bolt                   // Bolt/lightning
+fa-solid fa-battery-full           // Full battery
+fa-solid fa-battery-three-quarters // 75% battery
+fa-solid fa-battery-half           // Half battery (your current)
+fa-solid fa-battery-quarter        // Quarter battery
+fa-solid fa-battery-empty          // Empty battery
+fa-solid fa-plug                   // Plug
+fa-solid fa-charging-station       // Charging station
+fa-solid fa-gas-pump               // Gas pump
+fa-solid fa-oil-well               // Oil well
+fa-solid fa-solar-panel            // Solar panel
+fa-solid fa-wind                   // Wind
+fa-solid fa-water                  // Water
+fa-solid fa-droplet                // Droplet
+fa-solid fa-fire                   // Fire
+fa-solid fa-temperature-high       // High temperature
+fa-solid fa-temperature-low        // Low temperature
+fa-solid fa-fan                    // Fan
+```
+
+## 🔬 **Science & Research Icons**
+```
+fa-solid fa-microscope             // Microscope
+fa-solid fa-flask                  // Flask
+fa-solid fa-dna                    // DNA
+fa-solid fa-atom                   // Atom
+fa-solid fa-vial                   // Vial
+fa-solid fa-vials                  // Vials
+fa-solid fa-test-tube              // Test tube
+fa-solid fa-biohazard              // Biohazard
+fa-solid fa-radiation              // Radiation
+fa-solid fa-magnet                 // Magnet
+fa-solid fa-weight-scale           // Weight scale
+fa-solid fa-ruler                  // Ruler
+fa-solid fa-ruler-combined         // Combined ruler
+fa-solid fa-cubes                  // Cubes (materials)
+fa-solid fa-cube                   // Cube (material)
+fa-solid fa-shapes                 // Shapes
+fa-solid fa-cogs                   // Cogs/gears
+fa-solid fa-gear                   // Gear
+fa-solid fa-robot                  // Robot
+fa-solid fa-microchip              // Microchip
+fa-solid fa-cpu                    // CPU
+fa-solid fa-memory                 // Memory
+```
+
+## 🖥️ **Computational & Simulation Icons**
+```
+fa-solid fa-computer               // Computer
+fa-solid fa-laptop                 // Laptop
+fa-solid fa-desktop                // Desktop
+fa-solid fa-server                 // Server
+fa-solid fa-database               // Database
+fa-solid fa-cloud                  // Cloud
+fa-solid fa-code                   // Code
+fa-solid fa-terminal               // Terminal
+fa-solid fa-window-maximize        // Window
+fa-solid fa-chart-gantt            // Gantt chart
+fa-solid fa-diagram-project        // Project diagram
+fa-solid fa-network-wired          // Wired network
+fa-solid fa-wave-square            // Square wave
+fa-solid fa-chart-line             // Line chart
+fa-solid fa-chart-scatter          // Scatter plot
+fa-solid fa-border-all             // Border all (grid)
+fa-solid fa-table                  // Table
+fa-solid fa-matrix                 // Matrix
+fa-solid fa-function               // Function
+fa-solid fa-sigma                  // Sigma (summation)
+fa-solid fa-pi                     // Pi
+fa-solid fa-infinity               // Infinity
+```
+
+## ⚙️ **Engineering & Mechanics Icons**
+```
+fa-solid fa-gear                   // Gear
+fa-solid fa-gears                  // Gears
+fa-solid fa-wrench                 // Wrench
+fa-solid fa-hammer                 // Hammer
+fa-solid fa-tools                  // Tools
+fa-solid fa-cogs                   // Cogs
+fa-solid fa-cog                    // Cog
+fa-solid fa-engine                 // Engine
+fa-solid fa-turbine                // Turbine
+fa-solid fa-pump                   // Pump
+fa-solid fa-pipe                   // Pipe
+fa-solid fa-valve                  // Valve
+fa-solid fa-water                  // Water
+fa-solid fa-wind                   // Wind
+fa-solid fa-weight-hanging         // Hanging weight
+fa-solid fa-arrow-trend-up         // Trend up (stress/strain)
+fa-solid fa-arrow-trend-down       // Trend down
+fa-solid fa-arrows-spin            // Spinning arrows (rotation)
+fa-solid fa-rotate                  // Rotate
+fa-solid fa-repeat                  // Repeat (cycle)
+fa-solid fa-circle-nodes            // Nodes network
+fa-solid fa-diagram-predecessor    // Predecessor diagram
+fa-solid fa-link                   // Link
+fa-solid fa-paper-plane            // Paper plane (aerodynamics)
+fa-solid fa-fan                    // Fan
+```
+
+## 🔥 **Thermofluids Icons**
+```
+fa-solid fa-temperature-high       // High temperature
+fa-solid fa-temperature-low        // Low temperature
+fa-solid fa-thermometer-half       // Thermometer half
+fa-solid fa-thermometer-full       // Thermometer full
+fa-solid fa-fire                    // Fire
+fa-solid fa-smog                    // Smog
+fa-solid fa-smoke                   // Smoke
+fa-solid fa-wind                    // Wind
+fa-solid fa-water                    // Water
+fa-solid fa-droplet                  // Droplet
+fa-solid fa-wave-square              // Wave (fluid dynamics)
+fa-solid fa-chart-line               // Line chart
+fa-solid fa-chart-water              // Water chart
+fa-solid fa-heat                     // Heat
+fa-solid fa-fan                      // Fan
+fa-solid fa-pump                     // Pump
+fa-solid fa-compress                  // Compress
+fa-solid fa-expand                    // Expand
+fa-solid fa-arrows-left-right-to-line // Flow
+```
+
+## 🧪 **Materials Science Icons**
+```
+fa-solid fa-cubes                   // Cubes (materials)
+fa-solid fa-cube                    // Cube
+fa-solid fa-shapes                  // Shapes
+fa-solid fa-border-all              // Grid (crystal lattice)
+fa-solid fa-table-cells             // Cells (matrix)
+fa-solid fa-bezier-curve            // Bezier curve
+fa-solid fa-chart-line              // Stress-strain curve
+fa-solid fa-weight-scale            // Weight
+fa-solid fa-ruler                   // Length measurement
+fa-solid fa-microscope              // Microscopy
+fa-solid fa-atom                    // Atomic structure
+fa-solid fa-dna                     // Molecular structure
+fa-solid fa-circle                  // Circle (particle)
+fa-solid fa-cubes-stack             // Stack of cubes
+fa-solid fa-layer-group             // Layers
+fa-solid fa-bolt                    // Lightning (electrical properties)
+fa-solid fa-magnet                  // Magnetic properties
+```
+
+## 📊 **Data Science & ML Icons**
+```
+fa-solid fa-brain                   // Brain (neural network)
+fa-solid fa-chart-line              // Line chart
+fa-solid fa-chart-bar               // Bar chart
+fa-solid fa-chart-pie               // Pie chart
+fa-solid fa-chart-scatter           // Scatter plot
+fa-solid fa-database                // Database
+fa-solid fa-code                    // Code
+fa-solid fa-code-branch             // Code branch (git)
+fa-solid fa-robot                   // Robot
+fa-solid fa-network-wired           // Neural network
+fa-solid fa-circle-nodes            // Nodes network
+fa-solid fa-project-diagram         // Project diagram
+fa-solid fa-diagram-project         // Diagram project
+fa-solid fa-share-nodes             // Share nodes
+fa-solid fa-matrix                  // Matrix
+fa-solid fa-table                   // Table data
+fa-solid fa-filter                  // Filter
+fa-solid fa-sliders                 // Sliders (parameters)
+fa-solid fa-chart-simple            // Simple chart
+fa-solid fa-chart-gantt             // Gantt chart
+```
+
+## 🏭 **Industrial & Manufacturing Icons**
+```
+fa-solid fa-industry                // Industry
+fa-solid fa-factory                 // Factory
+fa-solid fa-building                // Building
+fa-solid fa-warehouse               // Warehouse
+fa-solid fa-conveyor-belt           // Conveyor belt
+fa-solid fa-robot                   // Industrial robot
+fa-solid fa-gear                    // Gear
+fa-solid fa-gears                   // Multiple gears
+fa-solid fa-cogs                    // Cogs
+fa-solid fa-hammer                  // Hammer
+fa-solid fa-wrench                  // Wrench
+fa-solid fa-tools                   // Tools
+fa-solid fa-screwdriver-wrench      // Screwdriver and wrench
+fa-solid fa-pipe-valve              // Pipe valve
+fa-solid fa-pump-soap               // Pump
+fa-solid fa-compress                // Compress (press)
+fa-solid fa-expand                  // Expand
+fa-solid fa-weight-hanging          // Hanging weight
+fa-solid fa-crane                   // Crane
+fa-solid fa-helmet-safety           // Safety helmet
+```
+
+## 🎯 **General Research Icons**
+```
+fa-solid fa-magnifying-glass        // Search (research)
+fa-solid fa-search                  // Search
+fa-solid fa-eye                     // Eye (observation)
+fa-solid fa-microscope              // Microscopy
+fa-solid fa-flask                   // Experiment
+fa-solid fa-pen-ruler               // Pen and ruler (design)
+fa-solid fa-draw-polygon            // Draw polygon
+fa-solid fa-vector-square           // Vector square
+fa-solid fa-bezier-curve            // Bezier curve
+fa-solid fa-chart-pie               // Data analysis
+fa-solid fa-table                   // Data table
+fa-solid fa-file-lines              // Report
+fa-solid fa-scroll                  // Research paper
+fa-solid fa-newspaper               // Publication
+fa-solid fa-books                    // Books (library)
+fa-solid fa-book-atlas               // Atlas
+fa-solid fa-landmark                 // Landmark (institution)
+fa-solid fa-university               // University
+fa-solid fa-users                    // Team/Collaborators
+fa-solid fa-user-graduate            // Graduate student
+fa-solid fa-chalkboard-user          // Teacher/Professor
+```
+Excellent! Here's a focused collection of icon classes for malware research, kernel security, and web security:
+
+## 🦠 **Malware Research & Reverse Engineering Icons**
+
+```
+fa-solid fa-bug                    // Bug (malware, vulnerability)
+fa-solid fa-bug-slash               // Bug slash (anti-malware)
+fa-solid fa-skull                   // Skull (malicious)
+fa-solid fa-skull-crossbones         // Skull and crossbones (danger)
+fa-solid fa-virus                    // Virus
+fa-solid fa-virus-covid              // Virus (specific)
+fa-solid fa-biohazard                // Biohazard (dangerous code)
+fa-solid fa-radiation                // Radiation (malicious activity)
+fa-solid fa-dna                      // DNA (code structure)
+fa-solid fa-code                     // Code
+fa-solid fa-code-branch              // Code branch (malware variants)
+fa-solid fa-code-commit              // Code commit (changes)
+fa-solid fa-code-compare             // Code comparison
+fa-solid fa-code-fork                // Code fork (malware families)
+fa-solid fa-code-pull-request        // Code pull request
+fa-solid fa-code-simple              // Simple code
+fa-solid fa-file-code                // File code
+fa-solid fa-file-binary              // Binary file
+fa-solid fa-file-lines               // File lines
+fa-solid fa-file-magnifying-glass    // File search
+fa-solid fa-file-shield              // File shield
+fa-solid fa-magnifying-glass         // Magnifying glass (analysis)
+fa-solid fa-search                   // Search
+fa-solid fa-microscope               // Microscope (deep analysis)
+fa-solid fa-flask                    // Flask (experimentation)
+fa-solid fa-flask-round-potion       // Potion (analysis)
+fa-solid fa-chart-line                // Line chart (behavior analysis)
+fa-solid fa-chart-gantt               // Gantt chart (timeline)
+fa-solid fa-chart-scatter             // Scatter plot (anomalies)
+fa-solid fa-diagram-project           // Project diagram
+fa-solid fa-network-wired             // Network (C2 traffic)
+fa-solid fa-project-diagram           // Project diagram
+fa-solid fa-shield                    // Shield (defense)
+fa-solid fa-shield-halved              // Shield half (protection)
+fa-solid fa-shield-blank               // Shield blank
+fa-solid fa-shield-check               // Shield check (clean)
+fa-solid fa-shield-exclamation         // Shield exclamation
+fa-solid fa-shield-heart               // Shield heart
+fa-solid fa-shield-virus               // Shield virus
+fa-solid fa-terminal                   // Terminal
+fa-solid fa-terminal-window            // Terminal window
+fa-solid fa-window-terminal            // Window terminal
+fa-solid fa-window-maximize            // Window (sandbox)
+fa-solid fa-cpu                        // CPU (execution)
+fa-solid fa-microchip                  // Microchip
+fa-solid fa-memory                     // Memory (RAM analysis)
+fa-solid fa-hard-drive                 // Hard drive (disk analysis)
+fa-solid fa-database                   // Database
+fa-solid fa-cloud                      // Cloud
+fa-solid fa-cloud-arrow-up             // Cloud upload (exfiltration)
+fa-solid fa-cloud-arrow-down           // Cloud download (payload)
+fa-solid fa-lock                       // Lock
+fa-solid fa-lock-open                  // Lock open (exploit)
+fa-solid fa-key                        // Key (crypto)
+fa-solid fa-key-skeleton                // Key skeleton
+```
+
+## 🐧 **Linux Kernel & System Security Icons**
+
+```
+fa-solid fa-linux                     // Linux (penguin)
+fa-solid fa-terminal                  // Terminal
+fa-solid fa-terminal-window           // Terminal window
+fa-solid fa-window-terminal           // Window terminal
+fa-solid fa-cmd                       // Command prompt
+fa-solid fa-code                      // Code
+fa-solid fa-code-branch               // Kernel branches
+fa-solid fa-code-pull-request         // Pull requests
+fa-solid fa-code-merge                // Code merge
+fa-solid fa-gear                      // Gear (kernel config)
+fa-solid fa-gears                     // Gears (kernel modules)
+fa-solid fa-cogs                      // Cogs (system)
+fa-solid fa-cpu                       // CPU (kernel)
+fa-solid fa-microchip                 // Microchip
+fa-solid fa-memory                    // Memory management
+fa-solid fa-hard-drive                 // Hard drive (filesystem)
+fa-solid fa-database                   // Kernel data structures
+fa-solid fa-shield                     // Security
+fa-solid fa-shield-halved              // Kernel protection
+fa-solid fa-shield-blank               // Blank shield
+fa-solid fa-shield-check               // Security check
+fa-solid fa-shield-exclamation         // Security alert
+fa-solid fa-lock                       // Lock (secure)
+fa-solid fa-lock-open                  // Unlocked (vulnerability)
+fa-solid fa-unlock                      // Unlock
+fa-solid fa-unlock-keyhole              // Unlock keyhole
+fa-solid fa-key                        // Key (access)
+fa-solid fa-key-skeleton                // Key skeleton
+fa-solid fa-fingerprint                 // Fingerprint (identity)
+fa-solid fa-eye                        // Eye (monitoring)
+fa-solid fa-eye-slash                   // Eye slash (hidden)
+fa-solid fa-binoculars                  // Binoculars (system view)
+fa-solid fa-magnifying-glass            // Magnifying glass
+fa-solid fa-search                      // Search
+fa-solid fa-sitemap                     // Sitemap (syscall map)
+fa-solid fa-diagram-project             // Diagram
+fa-solid fa-project-diagram              // Project diagram
+fa-solid fa-circle-nodes                 // Nodes (kernel objects)
+fa-solid fa-link                        // Link (syscalls)
+fa-solid fa-chain                       // Chain (dependencies)
+fa-solid fa-chain-broken                 // Broken chain
+fa-solid fa-clock                       // Clock (timing)
+fa-solid fa-hourglass                    // Hourglass
+fa-solid fa-stopwatch                    // Stopwatch
+fa-solid fa-timer                        // Timer
+fa-solid fa-bolt                        // Bolt (performance)
+fa-solid fa-rocket                      // Rocket (boot)
+fa-solid fa-power-off                    // Power off
+fa-solid fa-rotate                       // Rotate (reboot)
+fa-solid fa-arrows-spin                  // Spin (processes)
+fa-solid fa-infinity                     // Infinity (kernel space)
+fa-solid fa-crown                        // Crown (root)
+fa-solid fa-robot                        // Robot (daemon)
+```
+
+## 🕸️ **Web Security & Application Security Icons**
+
+```
+fa-solid fa-globe                      // Globe (web)
+fa-solid fa-earth                       // Earth
+fa-solid fa-earth-americas               // Americas
+fa-solid fa-earth-asia                    // Asia
+fa-solid fa-earth-europe                  // Europe
+fa-solid fa-wifi                        // WiFi (network)
+fa-solid fa-wifi-slash                   // WiFi slash
+fa-solid fa-network-wired                // Wired network
+fa-solid fa-window-maximize              // Browser window
+fa-solid fa-window-restore                // Restore window
+fa-solid fa-window-minimize               // Minimize window
+fa-solid fa-window-close                   // Close window
+fa-solid fa-browser                       // Browser
+fa-solid fa-chrome                        // Chrome browser
+fa-solid fa-firefox                       // Firefox browser
+fa-solid fa-edge                          // Edge browser
+fa-solid fa-safari                        // Safari browser
+fa-solid fa-internet-explorer              // IE browser
+fa-solid fa-cloud                        // Cloud
+fa-solid fa-cloud-arrow-up                // Upload
+fa-solid fa-cloud-arrow-down              // Download
+fa-solid fa-cloud-upload                   // Upload
+fa-solid fa-cloud-download                 // Download
+fa-solid fa-server                        // Server
+fa-solid fa-database                       // Database (SQL injection)
+fa-solid fa-code                          // Code (XSS)
+fa-solid fa-code-branch                    // Branch
+fa-solid fa-code-compare                   // Compare
+fa-solid fa-code-fork                      // Fork
+fa-solid fa-code-pull-request              // Pull request
+fa-solid fa-code-merge                     // Merge
+fa-solid fa-code-simple                    // Simple code
+fa-solid fa-file-code                      // File code
+fa-solid fa-file-export                     // File export
+fa-solid fa-file-import                     // File import
+fa-solid fa-file-shield                     // File shield
+fa-solid fa-file-signature                  // File signature
+fa-solid fa-shield                         // Shield (WAF)
+fa-solid fa-shield-halved                   // Shield half
+fa-solid fa-shield-blank                    // Shield blank
+fa-solid fa-shield-check                    // Shield check
+fa-solid fa-shield-exclamation               // Shield exclamation
+fa-solid fa-shield-heart                     // Shield heart
+fa-solid fa-shield-virus                     // Shield virus
+fa-solid fa-lock                            // Lock (HTTPS)
+fa-solid fa-lock-open                        // Unlocked (HTTP)
+fa-solid fa-unlock                           // Unlock
+fa-solid fa-unlock-keyhole                   // Unlock keyhole
+fa-solid fa-key                             // Key (API key)
+fa-solid fa-key-skeleton                     // Key skeleton
+fa-solid fa-passport                        // Passport (auth)
+fa-solid fa-id-card                          // ID card
+fa-solid fa-id-card-clip                     // ID card clip
+fa-solid fa-address-card                     // Address card
+fa-solid fa-user                             // User
+fa-solid fa-user-lock                        // User lock
+fa-solid fa-user-secret                      // User secret (admin)
+fa-solid fa-user-shield                      // User shield
+fa-solid fa-user-xmark                       // User block
+fa-solid fa-users                            // Users
+fa-solid fa-users-slash                      // Users slash
+fa-solid fa-users-gear                       // Users gear
+fa-solid fa-user-tie                         // User tie (privileged)
+fa-solid fa-user-ninja                       // User ninja (hacker)
+fa-solid fa-robot                            // Robot (bot)
+fa-solid fa-bot                              // Bot
+fa-solid fa-magnifying-glass                  // Magnifying glass
+fa-solid fa-search                           // Search
+fa-solid fa-search-location                   // Search location
+fa-solid fa-filter                           // Filter (input validation)
+fa-solid fa-sliders                           // Sliders (settings)
+fa-solid fa-sliders-up                        // Sliders up
+fa-solid fa-toggle-on                         // Toggle on
+fa-solid fa-toggle-off                        // Toggle off
+fa-solid fa-flag                              // Flag (XSS)
+fa-solid fa-flag-checkered                    // Flag checkered
+fa-solid fa-triangle-exclamation               // Warning
+fa-solid fa-circle-exclamation                 // Exclamation circle
+fa-solid fa-circle-info                       // Info
+fa-solid fa-circle-question                    // Question
+fa-solid fa-circle-check                       // Check
+fa-solid fa-circle-xmark                       // X mark
+fa-solid fa-bug                               // Bug
+fa-solid fa-bug-slash                          // Bug slash
+fa-solid fa-skull                              // Skull
+fa-solid fa-skull-crossbones                   // Skull crossbones
+fa-solid fa-virus                              // Virus
+fa-solid fa-virus-covid                        // Virus covid
+fa-solid fa-biohazard                          // Biohazard
+fa-solid fa-radiation                          // Radiation
+```
+
+## 🛡️ **General Security Research Icons**
+
+```
+fa-solid fa-shield                         // Shield
+fa-solid fa-shield-halved                   // Shield half
+fa-solid fa-shield-blank                    // Shield blank
+fa-solid fa-shield-check                    // Shield check
+fa-solid fa-shield-exclamation               // Shield exclamation
+fa-solid fa-shield-heart                     // Shield heart
+fa-solid fa-shield-virus                     // Shield virus
+fa-solid fa-shield-cat                       // Shield cat
+fa-solid fa-shield-dog                       // Shield dog
+fa-solid fa-lock                            // Lock
+fa-solid fa-lock-open                        // Lock open
+fa-solid fa-unlock                           // Unlock
+fa-solid fa-unlock-keyhole                   // Unlock keyhole
+fa-solid fa-key                             // Key
+fa-solid fa-key-skeleton                     // Key skeleton
+fa-solid fa-fingerprint                      // Fingerprint
+fa-solid fa-eye                             // Eye (monitoring)
+fa-solid fa-eye-slash                        // Eye slash (hidden)
+fa-solid fa-mask                             // Mask
+fa-solid fa-ghost                            // Ghost (stealth)
+fa-solid fa-robot                            // Robot
+fa-solid fa-terminal                         // Terminal
+fa-solid fa-terminal-window                  // Terminal window
+fa-solid fa-window-terminal                  // Window terminal
+fa-solid fa-code                             // Code
+fa-solid fa-bug                              // Bug
+fa-solid fa-bug-slash                        // Bug slash
+fa-solid fa-skull                            // Skull
+fa-solid fa-skull-crossbones                  // Skull crossbones
+fa-solid fa-triangle-exclamation              // Triangle exclamation
+fa-solid fa-circle-exclamation                // Circle exclamation
+fa-solid fa-circle-info                       // Circle info
+fa-solid fa-circle-question                   // Circle question
+fa-solid fa-circle-check                      // Circle check
+fa-solid fa-circle-xmark                      // Circle xmark
+fa-solid fa-filter                           // Filter
+fa-solid fa-sliders                           // Sliders
+fa-solid fa-sliders-up                        // Sliders up
+fa-solid fa-gear                             // Gear
+fa-solid fa-gears                            // Gears
+fa-solid fa-cogs                             // Cogs
+fa-solid fa-wrench                           // Wrench
+fa-solid fa-hammer                           // Hammer
+fa-solid fa-tools                            // Tools
+fa-solid fa-screwdriver-wrench                // Screwdriver wrench
+```
+
+## 🎯 **Recommended Combinations for Your Research Areas:**
+
+### Malware Research:
+- `fa-solid fa-bug` + `fa-solid fa-skull` 
+- `fa-solid fa-virus` + `fa-solid fa-shield`
+- `fa-solid fa-code` + `fa-solid fa-biohazard`
+
+### Linux Kernel Security:
+- `fa-brands fa-linux` + `fa-solid fa-shield`
+- `fa-solid fa-terminal` + `fa-solid fa-lock`
+- `fa-solid fa-cpu` + `fa-solid fa-key`
+
+### Web Security:
+- `fa-solid fa-globe` + `fa-solid fa-shield`
+- `fa-solid fa-window-maximize` + `fa-solid fa-lock`
+- `fa-solid fa-cloud` + `fa-solid fa-user-secret`
+
+### Security Research:
+- `fa-solid fa-magnifying-glass` + `fa-solid fa-bug`
+- `fa-solid fa-microscope` + `fa-solid fa-shield`
+- `fa-solid fa-search` + `fa-solid fa-skull-crossbones`
+
+These icons will perfectly represent your security research focus areas! 🔒🐧🕸️
+## How to Use:
+
+In your research area form, you can use any of these icon classes. For example:
+- `fa-solid fa-bolt` - Energy research
+- `fa-solid fa-microscope` - Lab research  
+- `fa-solid fa-cubes` - Materials science
+- `fa-solid fa-chart-line` - Data analysis
+- `fa-solid fa-wind` - Fluid dynamics
+- `fa-solid fa-temperature-high` - Thermodynamics
+
+The icons will display as beautiful, scalable vector graphics in your research area cards! 🎨✨

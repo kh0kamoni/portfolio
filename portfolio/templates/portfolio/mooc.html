@@ -1,0 +1,315 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}MOOC Certifications — Khokamoni{% endblock %}
+
+{% block content %}
+<!-- HERO ──────────────────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-laptop-code"></i>
+            Online Learning
+        </div>
+        <h1 class="hero-name">MOOC<br><em>Certifications</em></h1>
+        <p class="hero-bio">
+            A collection of online courses and certifications from leading platforms
+            like MathWorks, Coursera, and edX, demonstrating continuous learning
+            in computational methods and engineering software.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-certificate" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- MOOC STATS ──────────────────────────────────── -->
+<div class="stats-row" style="margin-top: 2rem;">
+    <div class="stat-card glass">
+        <div class="stat-val">{{ total_courses }}</div>
+        <div class="stat-lbl">Completed<br>Courses</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">{{ total_providers }}</div>
+        <div class="stat-lbl">Learning<br>Platforms</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">100%</div>
+        <div class="stat-lbl">Completion<br>Rate</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">
+            {% if categories %}
+                {% for cat in categories|slice:":1" %}{{ cat.name }}{% endfor %}
+            {% else %}
+                MATLAB
+            {% endif %}
+        </div>
+        <div class="stat-lbl">Primary<br>Tool</div>
+    </div>
+</div>
+
+<!-- FEATURED COURSES ──────────────────────────────────── -->
+{% if featured_courses %}
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Latest Certifications</p>
+    <h2 class="sec-title">Featured Courses</h2>
+    
+    <div class="panel glass" style="padding: 2rem;">
+        <!-- Courses Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem;">
+            {% for course in featured_courses %}
+            <div class="mooc-card" style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255,255,255,0.8); backdrop-filter: blur(10px);">
+                <!-- Header with Logo and Basic Info -->
+                <div style="display: flex; gap: 1.5rem; padding: 1.5rem; background: linear-gradient(145deg, rgba(255,255,255,0.4), rgba(255,255,255,0.2)); border-bottom: 1px solid rgba(255,255,255,0.6);">
+                    <!-- Logo Circle -->
+                    <div style="flex-shrink: 0;">
+                        <div style="width: 100px; height: 100px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 4px 12px rgba(13,92,118,0.15); border: 2px solid rgba(255,255,255,0.8);">
+                            {% if course.provider.logo %}
+                                <img src="{{ course.provider.logo.url }}" alt="{{ course.provider.name }}" style="width: 90%; height: 90%; object-fit: contain;">
+                            {% else %}
+                                <i class="fa-solid fa-certificate" style="color: var(--w-depth); font-size: 2.2rem;"></i>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Course Title and Provider - Title on top -->
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--w-abyss); margin: 0 0 0.3rem 0; line-height: 1.3; font-family: 'DM Serif Display', serif;">
+                            {{ course.title }}
+                        </h3>
+                        
+                        <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
+                            <!-- <span style="font-size: 1rem; font-weight: 500; color: var(--w-depth);">
+                                {{ course.provider.name }}
+                            </span> -->
+
+                            <span style="background: rgba(109,191,218,0.2); color: var(--w-depth); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.8rem; border-radius: var(--radius-pill); display: inline-flex; align-items: center; gap: 0.3rem;">
+                                <i class="fa-regular " style="color: var(--w-teal);"></i>  {{ course.provider.name }}
+                            </span>
+
+
+                            <span style="font-size: 0.8rem; color: var(--w-current); background: rgba(255,255,255,0.4); padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">
+                                <i class="fa-regular fa-calendar"></i> {{ course.completion_date|date:"j F Y" }}
+                            </span>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: rgba(109,191,218,0.2); color: var(--w-depth); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.8rem; border-radius: var(--radius-pill); display: inline-flex; align-items: center; gap: 0.3rem;">
+                                <i class="fa-regular fa-circle-check" style="color: var(--w-teal);"></i> {{ course.completion_percentage }}% Complete
+                            </span>
+                            {% if course.duration_hours %}
+                            <span style="font-size: 0.75rem; color: var(--w-current); display: inline-flex; align-items: center; gap: 0.3rem;">
+                                <i class="fa-regular fa-clock" style="color: var(--w-teal);"></i> {{ course.duration_hours }} hours
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Description + Certificate + Actions -->
+<div style="padding: 1.2rem 1.5rem 1.5rem; border-bottom: 1px dashed rgba(184,228,244,0.4);">
+
+    <!-- Top Section: Left Content + Right Certificate -->
+    <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+
+        <!-- LEFT SIDE -->
+        <div style="flex: 1; min-width: 300px;">
+
+            {% if course.description %}
+            <p style="font-size: 0.95rem; color: var(--w-current); line-height: 1.6; margin-bottom: 1rem;">
+                {{ course.description }}
+            </p>
+            {% endif %}
+
+            {% if course.get_skills_list %}
+            <div>
+                <p style="font-size: 0.75rem; color: var(--w-depth); font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                    <i class="fa-solid fa-code" style="margin-right: 0.3rem;"></i> Skills Acquired
+                </p>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    {% for skill in course.get_skills_list %}
+                    <span class="chip" style="font-size: 0.75rem; background: rgba(255,255,255,0.4); padding: 0.3rem 0.8rem;">
+                        {{ skill }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if course.credential_id %}
+            <div style="margin-top: 0.8rem;">
+                <span style="font-size: 0.7rem; color: var(--w-current); background: rgba(255,255,255,0.3); padding: 0.2rem 0.8rem; border-radius: var(--radius-pill); display: inline-block;">
+                    <i class="fa-regular fa-id-card" style="margin-right: 0.3rem;"></i>
+                    Credential ID: {{ course.credential_id }}
+                </span>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- RIGHT SIDE: Certificate Preview -->
+        {% if course.certificate_file %}
+        <div style="flex: 1; min-width: 320px;">
+
+            <div style="background: white; border-radius: var(--radius-sm); border: 1px solid rgba(109,191,218,0.3); overflow: hidden; box-shadow: 0 4px 12px rgba(13,92,118,0.08); height: 240px; display: flex; align-items: center; justify-content: center;">
+                {% with course.certificate_file.url|lower as file_url %}
+                    {% if ".pdf" in file_url %}
+                        <iframe src="{{ course.certificate_file.url }}#toolbar=0"
+                                style="width:100%; height:100%; border:none;">
+                        </iframe>
+                    {% else %}
+                        <img src="{{ course.certificate_file.url }}"
+                             alt="Certificate Preview"
+                             style="width:100%; height:100%; object-fit: contain;">
+                    {% endif %}
+                {% endwith %}
+
+            </div>
+
+        </div>
+        {% endif %}
+
+    </div>
+
+    <!-- Bottom Action Buttons -->
+    <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem; flex-wrap: wrap;">
+
+        {% if course.certificate_file %}
+        <a href="{{ course.certificate_file.url }}" target="_blank"
+           style="background: rgba(109,191,218,0.1); padding: 0.7rem 1.4rem; border-radius: var(--radius-pill); font-size: 0.85rem; font-weight: 600; color: var(--w-depth); display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none;">
+            <i class="fa-solid fa-download"></i> Download Certificate
+        </a>
+        {% endif %}
+
+        {% if course.credential_url %}
+        <a href="{{ course.credential_url }}" target="_blank" class="btn btn-primary"
+           style="padding: 0.7rem 1.5rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.6rem; white-space: nowrap;">
+            <i class="fa-regular fa-eye"></i> Verify Credentials
+        </a>
+        {% else %}
+        <div style="background: rgba(255,255,255,0.3); padding: 0.7rem 1.2rem; border-radius: var(--radius-pill);">
+            <span style="font-size: 0.8rem; color: var(--w-current);">No verification link</span>
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ALL CERTIFICATIONS LIST ───────────────────────────── -->
+{% if courses %}
+<section style="margin-top: 3rem;">
+    <div class="panel glass" style="padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <div style="width: 50px; height: 50px; border-radius: 1rem; background: linear-gradient(145deg, var(--w-teal), var(--w-depth)); display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-list" style="color: white; font-size: 1.5rem;"></i>
+            </div>
+            <h2 class="sec-title" style="margin-bottom: 0;">All Certifications</h2>
+        </div>
+
+        <!-- Timeline-style certificate list -->
+        <div style="position: relative; padding: 1rem 0;">
+            <!-- Timeline line -->
+            <div style="position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--w-teal), var(--w-depth)); opacity: 0.3;"></div>
+            
+            <!-- Timeline items -->
+            <div style="position: relative; padding-left: 50px;">
+                {% for course in courses %}
+                <div style="margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
+                        <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--w-teal); position: absolute; left: 15px; box-shadow: 0 0 0 3px rgba(109,191,218,0.3);"></div>
+                        <span class="tl-date">{{ course.completion_date|date:"F Y" }}</span>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); border-radius: var(--radius-md); padding: 1.2rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                            <div>
+                                <h3 style="font-weight: 600; color: var(--w-abyss);">{{ course.title }}</h3>
+                                <p style="color: var(--w-teal);">{{ course.provider.name }}</p>
+                            </div>
+                            {% if course.credential_url %}
+                            <a href="{{ course.credential_url }}" target="_blank" style="color: var(--w-depth); text-decoration: none; font-size: 0.85rem;">
+                                Credentials <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- COURSES BY PROVIDER ───────────────────────────────── -->
+{% if courses_by_provider %}
+<section style="margin-top: 3rem;">
+    <div class="panel glass" style="padding: 2rem;">
+        <p class="sec-eye">By Platform</p>
+        <h2 class="sec-title">Courses by Provider</h2>
+        
+        {% for provider_name, provider_courses in courses_by_provider.items %}
+        {% if provider_courses %}
+        <div style="margin-bottom: 2rem;">
+            <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--w-abyss); margin-bottom: 1rem;">{{ provider_name }}</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                {% for course in provider_courses %}
+                <div style="background: rgba(255,255,255,0.2); border-radius: var(--radius-md); padding: 1rem;">
+                    <p style="font-weight: 600; color: var(--w-abyss);">{{ course.title }}</p>
+                    <p style="font-size: 0.8rem; color: var(--w-current);">{{ course.completion_date|date:"M Y" }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- SKILLS ACQUIRED ──────────────────────────────────── -->
+{% if all_skills %}
+<section style="margin-top: 3rem;">
+    <div class="panel glass" style="padding: 2rem;">
+        <p class="sec-eye">Skills Gained</p>
+        <h2 class="sec-title">Competencies</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem;">
+            {% for skill in all_skills|slice:":12" %}
+            <span class="tag" style="font-size: 0.9rem; padding: 0.5rem 1.2rem;">{{ skill }}</span>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CALL TO ACTION ──────────────────────────────────── -->
+<section style="margin-top: 3rem; text-align: center;">
+    <div class="panel glass" style="padding: 2rem;">
+        <p style="font-size: 1.1rem; color: var(--w-depth); margin-bottom: 1rem;">
+            <i class="fa-regular fa-file-pdf"></i> 
+            Download all certificates and credentials
+        </p>
+        <a href="#" class="btn btn-primary">
+            <i class="fa-regular fa-file-zipper"></i> Download All
+        </a>
+    </div>
+</section>
+
+<style>
+    .mooc-card {
+        transition: var(--trans);
+    }
+    .mooc-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-hover);
+    }
+</style>
+{% endblock %}

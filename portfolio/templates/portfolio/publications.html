@@ -1,0 +1,137 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Publications — Khokamoni {% endblock %}
+
+{% block content %}
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-regular fa-file-lines"></i>
+            Scholarly Work
+        </div>
+        <h1 class="hero-name">Publications<br><em>& Presentations</em></h1>
+        <p class="hero-bio">
+            My research has been published in leading journals and presented at 
+            international conferences. Below is a complete list of my scholarly 
+            contributions.
+        </p>
+        <div class="hero-cta" style="margin-top: 1.5rem;">
+            {% if profile.google_scholar_url %}
+            <a href="{{ profile.google_scholar_url }}" class="btn btn-ghost">
+                <i class="fa-solid fa-graduation-cap"></i> Google Scholar
+            </a>
+            {% endif %}
+            <a href="#" class="btn btn-ghost">
+                <i class="fa-brands fa-orcid"></i> ORCID
+            </a>
+        </div>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-regular fa-newspaper" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- Publications List -->
+<section style="margin-top: 3rem;">
+    <div class="panel glass">
+        <ul class="pub-list">
+            {% for pub in publications %}
+            <li class="pub-item">
+                <span class="pub-type">{{ pub.get_publication_type_display }} · {{ pub.year }}</span>
+                <p class="pub-title">{{ pub.title }}</p>
+                <p class="pub-authors">{{ pub.authors }}</p>
+                {% if pub.journal %}
+                <p style="font-size: 0.77rem; color: var(--w-teal); margin-top: 0.2rem;">
+                    <em>{{ pub.journal }}</em>
+                    {% if pub.doi %} · DOI: {{ pub.doi }}{% endif %}
+                </p>
+                {% endif %}
+            </li>
+            {% empty %}
+            <li class="pub-item">
+                <p class="pub-title">No publications yet.</p>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
+                    <i class="fa-solid fa-chevron-left"></i> Previous
+                </a>
+            {% endif %}
+            
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <span class="page-current">{{ num }}</span>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link">
+                    Next <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Publication Metrics -->
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Statistics</p>
+    <h2 class="sec-title">Publication Metrics</h2>
+    <div class="stats-row">
+        <div class="stat-card glass">
+            <div class="stat-val">{{ total_publications }}</div>
+            <div class="stat-lbl">Total<br>Publications</div>
+        </div>
+        
+        <div class="stat-card glass">
+            <div class="stat-val">{{ journal_count }}</div>
+            <div class="stat-lbl">Journal<br>Articles</div>
+        </div>
+        
+        <div class="stat-card glass">
+            <div class="stat-val">{{ conference_count }}</div>
+            <div class="stat-lbl">Conference<br>Presentations</div>
+        </div>
+        
+        <div class="stat-card glass">
+            <div class="stat-val">{{ active_years_count }}</div>
+            <div class="stat-lbl">Active<br>Years</div>
+        </div>
+    </div>
+    
+    <!-- Optional: Additional metrics row -->
+    {% if total_citations > 0 or book_count > 0 or preprint_count > 0 %}
+    <div class="stats-row" style="margin-top: 1rem;">
+        {% if total_citations > 0 %}
+        <div class="stat-card glass">
+            <div class="stat-val">{{ total_citations }}</div>
+            <div class="stat-lbl">Total<br>Citations</div>
+        </div>
+        {% endif %}
+        
+        {% if book_count > 0 %}
+        <div class="stat-card glass">
+            <div class="stat-val">{{ book_count }}</div>
+            <div class="stat-lbl">Book<br>Chapters</div>
+        </div>
+        {% endif %}
+        
+        {% if preprint_count > 0 %}
+        <div class="stat-card glass">
+            <div class="stat-val">{{ preprint_count }}</div>
+            <div class="stat-lbl">Preprints</div>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

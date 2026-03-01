@@ -1,0 +1,126 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Contact — Khokamoni{% endblock %}
+
+{% block content %}
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-regular fa-envelope"></i>
+            Get in Touch
+        </div>
+        <h1 class="hero-name">Contact<br><em>& Connect</em></h1>
+        <p class="hero-bio">
+            I'm always open to research collaborations, mentoring opportunities, 
+            and academic discussions. Feel free to reach out through any of the 
+            channels below.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-regular fa-message" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- Contact Info & Form -->
+<div class="two-col" style="margin-top: 2rem;">
+    <!-- Contact Info -->
+    <div>
+        <p class="sec-eye">Connect</p>
+        <h2 class="sec-title">Contact Information</h2>
+        <div class="panel glass">
+            <div style="margin-bottom: 2rem;">
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Email</p>
+                <a href="mailto:{{ profile.email }}" class="clink" style="font-size: 1rem; padding: 0.75rem 1.5rem;">
+                    <i class="fa-regular fa-envelope"></i> {{ profile.email }}
+                </a>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Location</p>
+                <div class="clink" style="display: inline-flex; background: rgba(255,255,255,0.55);">
+                    <i class="fa-solid fa-location-dot"></i> Narsingdi, Dhaka, Bangladesh
+                </div>
+            </div>
+            
+            <div>
+                <p class="sec-eye" style="margin-bottom: 0.3rem;">Academic Networks</p>
+                <div class="contact-links">
+                    {% if profile.linkedin_url %}
+                    <a href="{{ profile.linkedin_url }}" class="clink">
+                        <i class="fa-brands fa-linkedin"></i> LinkedIn
+                    </a>
+                    {% endif %}
+                    {% if profile.google_scholar_url %}
+                    <a href="{{ profile.google_scholar_url }}" class="clink">
+                        <i class="fa-solid fa-graduation-cap"></i> Scholar
+                    </a>
+                    {% endif %}
+                    {% if profile.github_url %}
+                    <a href="{{ profile.github_url }}" class="clink">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    {% endif %}
+                    <a href="#" class="clink">
+                        <i class="fa-brands fa-orcid"></i> ORCID
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div>
+        <p class="sec-eye">Message</p>
+        <h2 class="sec-title">Send a Note</h2>
+        <div class="panel glass">
+            <form method="post" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div style="margin-bottom: 1rem;">
+                    <input type="text" name="name" placeholder="Your Name" required
+                           style="width: 100%; padding: 0.75rem; border-radius: var(--radius-pill); 
+                                  border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);
+                                  font-family: 'DM Sans', sans-serif;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <input type="email" name="email" placeholder="Your Email" required
+                           style="width: 100%; padding: 0.75rem; border-radius: var(--radius-pill); 
+                                  border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);
+                                  font-family: 'DM Sans', sans-serif;">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <input type="text" name="subject" placeholder="Subject" required
+                           style="width: 100%; padding: 0.75rem; border-radius: var(--radius-pill); 
+                                  border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);
+                                  font-family: 'DM Sans', sans-serif;">
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <textarea name="message" placeholder="Your Message" rows="5" required
+                              style="width: 100%; padding: 0.75rem; border-radius: var(--radius-md); 
+                                     border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);
+                                     font-family: 'DM Sans', sans-serif; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fa-regular fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Office Hours / Availability -->
+<section style="margin-top: 2rem;">
+    <div class="panel glass" style="text-align: center;">
+        <p class="sec-eye">Availability</p>
+        <p style="font-size: 1rem; color: var(--w-depth);">
+            <i class="fa-regular fa-clock"></i> 
+            Typically responds within 24-48 hours on weekdays
+        </p>
+        <div class="chips" style="justify-content: center; margin-top: 1rem;">
+            <span class="chip">Available for collaboration</span>
+            <span class="chip">Open to mentoring</span>
+            <span class="chip">Conference talks</span>
+        </div>
+    </div>
+</section>
+{% endblock %}

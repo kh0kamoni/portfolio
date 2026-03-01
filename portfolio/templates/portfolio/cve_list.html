@@ -1,0 +1,223 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}CVEs — Khokamoni | Security Research{% endblock %}
+
+{% block content %}
+<!-- HERO ──────────────────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-shield-halved"></i>
+            Vulnerability Research
+        </div>
+        <h1 class="hero-name">Common Vulnerabilities<br><em>& Exposures</em></h1>
+        <p class="hero-bio">
+            A collection of security vulnerabilities discovered and disclosed,
+            contributing to a safer digital ecosystem through responsible disclosure
+            and coordinated vulnerability disclosure practices.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, #d32f2f, #b71c1c);">
+        <span><i class="fa-solid fa-bug" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- CVE STATS ──────────────────────────────────── -->
+<div class="stats-row" style="margin-top: 2rem;">
+    <div class="stat-card glass">
+        <div class="stat-val">{{ total_cves }}</div>
+        <div class="stat-lbl">Total<br>CVEs</div>
+    </div>
+    <div class="stat-card glass" style="border-left: 4px solid #d32f2f;">
+        <div class="stat-val">{{ critical_count }}</div>
+        <div class="stat-lbl">Critical<br>Severity</div>
+    </div>
+    <div class="stat-card glass" style="border-left: 4px solid #f57c00;">
+        <div class="stat-val">{{ high_count }}</div>
+        <div class="stat-lbl">High<br>Severity</div>
+    </div>
+    <div class="stat-card glass" style="border-left: 4px solid #fbc02d;">
+        <div class="stat-val">{{ medium_count }}</div>
+        <div class="stat-lbl">Medium<br>Severity</div>
+    </div>
+</div>
+
+<!-- FILTERS AND SEARCH ───────────────────────────────── -->
+<div class="panel glass" style="padding: 1.2rem; margin-bottom: 2rem;">
+    <form method="get" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <div style="flex: 2; min-width: 250px;">
+            <input type="text" name="q" placeholder="Search by CVE ID, title, or product..." value="{{ request.GET.q }}" 
+                   style="width: 100%; padding: 0.6rem 1rem; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);">
+        </div>
+        
+        <div style="flex: 1; min-width: 150px;">
+            <select name="severity" style="width: 100%; padding: 0.6rem 1rem; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);">
+                <option value="">All Severities</option>
+                <option value="critical" {% if request.GET.severity == 'critical' %}selected{% endif %}>Critical</option>
+                <option value="high" {% if request.GET.severity == 'high' %}selected{% endif %}>High</option>
+                <option value="medium" {% if request.GET.severity == 'medium' %}selected{% endif %}>Medium</option>
+                <option value="low" {% if request.GET.severity == 'low' %}selected{% endif %}>Low</option>
+            </select>
+        </div>
+        
+        <div style="flex: 1; min-width: 120px;">
+            <select name="year" style="width: 100%; padding: 0.6rem 1rem; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);">
+                <option value="">All Years</option>
+                {% for year in years %}
+                <option value="{{ year|date:'Y' }}" {% if request.GET.year == year|date:'Y' %}selected{% endif %}>{{ year|date:'Y' }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1.5rem;">
+            <i class="fa-solid fa-filter"></i> Apply Filters
+        </button>
+        
+        {% if request.GET.q or request.GET.severity or request.GET.year %}
+        <a href="{% url 'cve_list' %}" class="btn btn-ghost" style="padding: 0.6rem 1.5rem;">
+            <i class="fa-solid fa-rotate-left"></i> Clear
+        </a>
+        {% endif %}
+    </form>
+</div>
+
+<!-- FEATURED CVES ───────────────────────────────────── -->
+{% if featured_cves and not request.GET %}
+<section style="margin-bottom: 3rem;">
+    <p class="sec-eye">Featured Disclosures</p>
+    <h2 class="sec-title">Notable Vulnerabilities</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+        {% for cve in featured_cves %}
+        <div class="cve-card featured" style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255,255,255,0.8);">
+            <div style="padding: 1.5rem; background: linear-gradient(145deg, rgba(0,0,0,0.02), rgba(0,0,0,0.05));">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <span class="cve-id" style="font-family: monospace; font-size: 1.1rem; font-weight: 600; color: var(--w-depth);">{{ cve.cve_id }}</span>
+                    <span class="severity-badge" style="background: {{ cve.get_cvss_color }}; color: white; padding: 0.2rem 0.8rem; border-radius: var(--radius-pill); font-size: 0.8rem; font-weight: 600;">
+                        {{ cve.get_severity_display }}
+                    </span>
+                </div>
+                
+                <h3 style="font-size: 1.1rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.5rem; line-height: 1.4;">
+                    <a href="{% url 'cve_detail' cve.cve_id %}" style="text-decoration: none; color: inherit;">{{ cve.title }}</a>
+                </h3>
+                
+                <p style="font-size: 0.85rem; color: var(--w-current); margin-bottom: 1rem; line-height: 1.5;">
+                    {{ cve.description|truncatechars:100 }}
+                </p>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                    <span style="font-size: 0.75rem; color: var(--w-teal);">
+                        <i class="fa-regular fa-calendar"></i> {{ cve.published_date|date:"M d, Y" }}
+                    </span>
+                    
+                    {% if cve.cvss_score %}
+                    <span style="font-size: 0.75rem; background: rgba(109,191,218,0.1); padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">
+                        CVSS {{ cve.cvss_score }}
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- CVES LIST ───────────────────────────────────────── -->
+<section>
+    <p class="sec-eye">Disclosures</p>
+    <h2 class="sec-title">All CVEs</h2>
+    
+    <div class="panel glass" style="padding: 1.5rem;">
+        {% if cves %}
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                {% for cve in cves %}
+                <div class="cve-list-item" style="background: rgba(255,255,255,0.2); border-radius: var(--radius-md); padding: 1.2rem; border: 1px solid rgba(255,255,255,0.7); transition: var(--trans);">
+                    <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+                        <div style="flex: 0 0 120px;">
+                            <span class="cve-id" style="font-family: monospace; font-size: 1rem; font-weight: 600; color: var(--w-depth); background: rgba(255,255,255,0.4); padding: 0.3rem 0.8rem; border-radius: var(--radius-pill); display: inline-block;">
+                                {{ cve.cve_id }}
+                            </span>
+                        </div>
+                        
+                        <div style="flex: 1; min-width: 250px;">
+                            <a href="{% url 'cve_detail' cve.cve_id %}" style="text-decoration: none;">
+                                <h3 style="font-size: 1rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.2rem;">{{ cve.title }}</h3>
+                            </a>
+                            <p style="font-size: 0.85rem; color: var(--w-current);">{{ cve.description|truncatechars:80 }}</p>
+                        </div>
+                        
+                        <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                            <span class="severity-badge" style="background: {{ cve.get_cvss_color }}; color: white; padding: 0.2rem 0.8rem; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 600;">
+                                {{ cve.get_severity_display }}
+                            </span>
+                            
+                            {% if cve.cvss_score %}
+                            <span style="font-size: 0.7rem; background: rgba(109,191,218,0.1); padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">
+                                CVSS {{ cve.cvss_score }}
+                            </span>
+                            {% endif %}
+                            
+                            <span style="font-size: 0.7rem; color: var(--w-current);">
+                                <i class="fa-regular fa-calendar"></i> {{ cve.published_date|date:"Y" }}
+                            </span>
+                            
+                            {% if cve.has_poc %}
+                            <span style="font-size: 0.7rem; background: rgba(211,47,47,0.1); color: #d32f2f; padding: 0.2rem 0.6rem; border-radius: var(--radius-pill);">
+                                <i class="fa-solid fa-code"></i> PoC
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="pagination" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem;">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.severity %}&severity={{ request.GET.severity }}{% endif %}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}" class="page-link">← Previous</a>
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="page-current">{{ num }}</span>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.severity %}&severity={{ request.GET.severity }}{% endif %}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}" class="page-link">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.severity %}&severity={{ request.GET.severity }}{% endif %}{% if request.GET.year %}&year={{ request.GET.year }}{% endif %}" class="page-link">Next →</a>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+        {% else %}
+            <div style="text-align: center; padding: 3rem;">
+                <i class="fa-solid fa-shield" style="font-size: 3rem; color: var(--w-teal); opacity: 0.5;"></i>
+                <p style="color: var(--w-current); margin-top: 1rem;">No CVEs found matching your criteria.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    .cve-card, .cve-list-item {
+        transition: var(--trans);
+    }
+    .cve-card:hover, .cve-list-item:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-hover);
+    }
+    .cve-card.featured {
+        border-left: 4px solid var(--w-depth);
+    }
+    .severity-badge {
+        transition: var(--trans);
+    }
+</style>
+{% endblock %}

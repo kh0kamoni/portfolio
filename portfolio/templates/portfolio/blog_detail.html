@@ -1,0 +1,191 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} — Khokamoni{% endblock %}
+
+{% block content %}
+<!-- BLOG POST HEADER -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-pen-fancy"></i>
+            {% for category in post.categories.all %}
+                <a href="{% url 'blog_category' category.slug %}" style="color: inherit; text-decoration: none;">{{ category.name }}</a>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </div>
+        <h1 class="hero-name">{{ post.title }}</h1>
+        
+        
+        <!-- Post metadata -->
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, var(--w-teal), var(--w-depth)); display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-regular fa-user" style="color: white;"></i>
+                </div>
+                <div>
+                    <p style="font-size: 0.85rem; color: var(--w-current);">Author</p>
+                    <p style="font-weight: 600; color: var(--w-abyss);">{{ post.author.get_full_name|default:post.author.username }}</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, var(--w-shallow), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-regular fa-calendar" style="color: var(--w-depth);"></i>
+                </div>
+                <div>
+                    <p style="font-size: 0.85rem; color: var(--w-current);">Published</p>
+                    <p style="font-weight: 600; color: var(--w-abyss);">{{ post.published_date|date:"F d, Y" }}</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, var(--w-shallow), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-regular fa-clock" style="color: var(--w-depth);"></i>
+                </div>
+                <div>
+                    <p style="font-size: 0.85rem; color: var(--w-current);">Read time</p>
+                    <p style="font-weight: 600; color: var(--w-abyss);">{{ post.reading_time_minutes }} min</p>
+                </div>
+            </div>
+            <div class="stat-card glass">
+        <div class="stat-val">
+            <a href="{% url 'blog_list' %}" style="color: inherit; text-decoration: none;">← All Posts</a>
+        </div>
+    </div>
+        </div>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-regular fa-newspaper" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- BLOG CONTENT -->
+<div class="two-col" style="margin-top: 2rem;">
+    <!-- Main Content -->
+    <div style="grid-column: span 2;">
+        <!-- Banner Image -->
+        {% if post.banner_image %}
+        <div style="margin-bottom: 2rem; border-radius: var(--radius-lg); overflow: hidden;">
+            <img src="{{ post.banner_image.url }}" alt="{{ post.title }}" style="width: 100%; max-height: 400px; object-fit: cover;">
+        </div>
+        {% endif %}
+        
+        <!-- Post Content -->
+        <div class="panel glass" style="padding: 2.5rem;">
+            <div class="blog-content" style="font-size: 1rem; line-height: 1.8; color: var(--w-abyss);">
+                {{ post.content|linebreaks }}
+            </div>
+            
+            <!-- Tags -->
+            {% if post.tags.all %}
+            <hr class="divider" style="margin: 2rem 0;">
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+                <span style="font-size: 0.85rem; color: var(--w-depth); font-weight: 600;">Tags:</span>
+                {% for tag in post.tags.all %}
+                <a href="{% url 'blog_tag' tag.slug %}" class="chip" style="text-decoration: none;">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <!-- References -->
+            {% if post.references.all %}
+            <hr class="divider" style="margin: 2rem 0;">
+            <p class="sec-eye">References</p>
+            <h3 class="sec-title" style="font-size: 1.2rem;">Citations</h3>
+            <ul style="list-style: none; padding: 0;">
+                {% for ref in post.references.all %}
+                <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--w-teal);">[{{ forloop.counter }}]</span>
+                    <p style="font-size: 0.9rem; color: var(--w-current);">
+                        {{ ref.authors }} ({{ ref.year }}). {{ ref.title }}.
+                        {% if ref.journal %}<em>{{ ref.journal }}</em>{% endif %}
+                        {% if ref.doi %} DOI: <a href="https://doi.org/{{ ref.doi }}" target="_blank" style="color: var(--w-depth);">{{ ref.doi }}</a>{% endif %}
+                    </p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        
+        <!-- Comments Section -->
+        <div class="panel glass" style="margin-top: 2rem; padding: 2rem;">
+            <p class="sec-eye">Discussion</p>
+            <h3 class="sec-title" style="font-size: 1.2rem;">Comments ({{ approved_comments.count }})</h3>
+            
+            <!-- Comment Form -->
+            <form method="post" style="margin-bottom: 2rem;">
+                {% csrf_token %}
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <input type="text" name="name" placeholder="Your Name *" required style="padding: 0.6rem 1rem; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);">
+                    <input type="email" name="email" placeholder="Your Email *" required style="padding: 0.6rem 1rem; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5);">
+                </div>
+                <textarea name="content" placeholder="Your Comment *" rows="4" required style="width: 100%; padding: 0.6rem 1rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.8); background: rgba(255,255,255,0.5); margin-bottom: 1rem;"></textarea>
+                <button type="submit" name="comment" class="btn btn-primary">
+                    <i class="fa-regular fa-paper-plane"></i> Post Comment
+                </button>
+            </form>
+            
+            <!-- Comments List -->
+            {% for comment in approved_comments %}
+            <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(184,228,244,0.4);">
+                <div style="display: flex; gap: 1rem; margin-bottom: 0.5rem;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, var(--w-shallow), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-regular fa-user" style="color: var(--w-depth);"></i>
+                    </div>
+                    <div>
+                        <p style="font-weight: 600; color: var(--w-abyss);">{{ comment.name }}</p>
+                        <p style="font-size: 0.75rem; color: var(--w-current);">{{ comment.created_date|date:"M d, Y" }}</p>
+                    </div>
+                </div>
+                <p style="font-size: 0.9rem; color: var(--w-current); margin-left: 3rem;">{{ comment.content }}</p>
+            </div>
+            {% empty %}
+            <p style="color: var(--w-current); text-align: center;">No comments yet. Be the first to share your thoughts!</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Related Posts -->
+{% if related_posts %}
+<section style="margin-top: 3rem;">
+    <p class="sec-eye">Related</p>
+    <h2 class="sec-title">You Might Also Like</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+        {% for related in related_posts %}
+        <div class="panel glass" style="padding: 1.2rem;">
+            <h3 style="font-size: 1rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.3rem;">
+                <a href="{% url 'blog_detail' related.slug %}" style="text-decoration: none; color: inherit;">{{ related.title }}</a>
+            </h3>
+            <p style="font-size: 0.8rem; color: var(--w-current);">{{ related.published_date|date:"M d, Y" }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<style>
+    .blog-content h1, .blog-content h2, .blog-content h3 {
+        font-family: 'DM Serif Display', serif;
+        color: var(--w-abyss);
+        margin: 1.5rem 0 1rem;
+    }
+    .blog-content h1 { font-size: 2rem; }
+    .blog-content h2 { font-size: 1.6rem; }
+    .blog-content h3 { font-size: 1.3rem; }
+    .blog-content p { margin-bottom: 1rem; }
+    .blog-content code {
+        background: rgba(109,191,218,0.1);
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+    .blog-content pre {
+        background: rgba(13,92,118,0.05);
+        padding: 1rem;
+        border-radius: var(--radius-md);
+        overflow-x: auto;
+        border: 1px solid rgba(109,191,218,0.3);
+    }
+</style>
+{% endblock %}

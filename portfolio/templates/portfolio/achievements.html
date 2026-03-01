@@ -1,0 +1,448 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Achievements — Khokamoni{% endblock %}
+
+{% block content %}
+<!-- HERO ──────────────────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-trophy"></i>
+            Recognition & Honors
+        </div>
+        <h1 class="hero-name">Achievements<br><em>& Awards</em></h1>
+        <p class="hero-bio">
+            A collection of academic honors, scholarships, and recognition received 
+            throughout my educational journey for excellence in research and academics.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, #ffd700, #ffed4e);">
+        <span><i class="fa-solid fa-medal" style="color: #8B4513; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- ACHIEVEMENT STATS ──────────────────────────────────── -->
+<div class="stats-row" style="margin-top: 2rem;">
+    <div class="stat-card glass">
+        <div class="stat-val">{{ total_honors }}</div>
+        <div class="stat-lbl">Total<br>Honors & Awards</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">{{ total_scholarships }}</div>
+        <div class="stat-lbl">Merit<br>Scholarships</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">{{ total_awards }}</div>
+        <div class="stat-lbl">Academic<br>Awards</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">5+</div>
+        <div class="stat-lbl">Conference<br>Presentations</div>
+    </div>
+</div>
+
+<!-- HONORS & AWARDS SECTION ──────────────────────────── -->
+<section style="margin-top: 3rem;">
+    <div class="panel glass">
+        <div class="section-header">
+            <div class="icon-gold">
+                <i class="fa-solid fa-star"></i>
+            </div>
+            <h2 class="sec-title" style="margin-bottom: 0;">Honors & Awards</h2>
+        </div>
+
+        <!-- Awards Grid -->
+        <div class="honor-grid">
+            {% for honor in honors %}
+            <div class="honor-card">
+                <div class="honor-header">
+                    <div class="honor-icon" style="background: {{ honor.color_gradient }};">
+                        <i class="{{ honor.icon_class }}" style="color: {{ honor.text_color }};"></i>
+                    </div>
+                    <div>
+                        {% if honor.honor_type == 'award' %}
+                        <span class="pub-type award-type">Award</span>
+                        {% elif honor.honor_type == 'scholarship' %}
+                        <span class="pub-type scholarship-type">Scholarship</span>
+                        {% else %}
+                        <span class="pub-type honor-type">Honor</span>
+                        {% endif %}
+                        <p class="honor-date">
+                            {{ honor.date_received|date:"F Y" }}
+                        </p>
+                    </div>
+                </div>
+                
+                <h3 class="honor-title">
+                    {{ honor.title }}
+                </h3>
+                
+                {% if honor.institution %}
+                <p class="honor-institution">
+                    <i class="fa-solid fa-building-columns"></i> {{ honor.institution.name }}
+                </p>
+                {% endif %}
+                
+                {% if honor.degree %}
+                <p class="honor-degree">
+                    <i class="fa-regular fa-graduation-cap"></i> {{ honor.degree.degree_name }}
+                </p>
+                {% endif %}
+                
+                {% if honor.description %}
+                <p class="honor-description">
+                    {{ honor.description }}
+                </p>
+                {% endif %}
+            </div>
+            {% empty %}
+            <p style="color: var(--w-current);">No honors or awards yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- SCHOLARSHIPS SECTION ───────────────────────────────── -->
+{% if scholarships %}
+<section style="margin-top: 2rem;">
+    <div class="panel glass">
+        <div class="section-header">
+            <div class="icon-silver">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 class="sec-title" style="margin-bottom: 0;">Scholarships & Fellowships</h2>
+        </div>
+
+        <div class="honor-grid">
+            {% for scholarship in scholarships %}
+            <div class="honor-card">
+                <div class="honor-header">
+                    <div class="honor-icon" style="background: {{ scholarship.color_gradient }};">
+                        <i class="{{ scholarship.icon_class }}" style="color: {{ scholarship.text_color }};"></i>
+                    </div>
+                    <div>
+                        <span class="pub-type scholarship-type">Scholarship</span>
+                        <p class="honor-date">
+                            {{ scholarship.date_received|date:"Y" }}
+                        </p>
+                    </div>
+                </div>
+                
+                <h3 class="honor-title">
+                    {{ scholarship.title }}
+                </h3>
+                
+                {% if scholarship.institution %}
+                <p class="honor-institution">
+                    <i class="fa-solid fa-building-columns"></i> {{ scholarship.institution.name }}
+                </p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ACHIEVEMENT TIMELINE ───────────────────────────────── -->
+<section style="margin-top: 2rem;">
+    <div class="panel glass">
+        <div class="section-header">
+            <div class="icon-teal">
+                <i class="fa-regular fa-calendar"></i>
+            </div>
+            <h2 class="sec-title" style="margin-bottom: 0;">Achievement Timeline</h2>
+        </div>
+        
+        <div class="timeline-container">
+            <!-- Timeline line -->
+            <div class="timeline-line"></div>
+            
+            <!-- Timeline items -->
+            <div class="timeline-items">
+                {% for honor in honors %}
+                <div class="timeline-item">
+                    {% if honor.honor_type == 'award' %}
+                    <div class="timeline-marker marker-award"></div>
+                    {% elif honor.honor_type == 'scholarship' %}
+                    <div class="timeline-marker marker-scholarship"></div>
+                    {% else %}
+                    <div class="timeline-marker marker-honor"></div>
+                    {% endif %}
+                    <span class="tl-date">{{ honor.date_received|date:"Y" }}</span>
+                    <div class="timeline-content">
+                        <p class="timeline-title">{{ honor.title }}</p>
+                        <p class="timeline-subtitle">
+                            {% if honor.honor_type == 'award' %}Award
+                            {% elif honor.honor_type == 'scholarship' %}Scholarship
+                            {% else %}Honor{% endif %}
+                            {% if honor.institution %} · {{ honor.institution.name }}{% endif %}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                {% for event in achievement_events %}
+                <div class="timeline-item">
+                    <div class="timeline-marker marker-event"></div>
+                    <span class="tl-date">{{ event.start_date|date:"Y" }}</span>
+                    <div class="timeline-content event-content">
+                        <p class="timeline-title">{{ event.title }}</p>
+                        <p class="timeline-subtitle">{{ event.get_event_type_display }}</p>
+                        {% if event.institution %}
+                        <p class="event-institution">{{ event.institution.name }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED ACHIEVEMENT ──────────────────────────────── -->
+<section style="margin-top: 2rem;">
+    <div class="panel glass featured-achievement">
+        <div class="featured-content">
+            <div class="featured-icon-container">
+                <div class="featured-icon">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <p class="stat-val featured-rank">6th</p>
+                <p class="stat-lbl">Class Rank out of 182</p>
+            </div>
+            <div class="featured-text">
+                <p class="sec-eye" style="color: var(--w-depth);">Featured Achievement</p>
+                <h3 class="featured-title">Top 4% of Class</h3>
+                <p class="featured-description">
+                    Ranked 6th among 182 students in the Department of Mechanical Engineering at BUET, demonstrating consistent academic excellence throughout the undergraduate program.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    .icon-gold {
+        width: 50px;
+        height: 50px;
+        border-radius: 1rem;
+        background: linear-gradient(145deg, #ffd700, #ffed4e);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .icon-gold i {
+        color: #8B4513;
+        font-size: 1.5rem;
+    }
+    .icon-silver {
+        width: 50px;
+        height: 50px;
+        border-radius: 1rem;
+        background: linear-gradient(145deg, #c0c0c0, #e0e0e0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .icon-silver i {
+        color: #4a4a4a;
+        font-size: 1.5rem;
+    }
+    .icon-teal {
+        width: 50px;
+        height: 50px;
+        border-radius: 1rem;
+        background: linear-gradient(145deg, var(--w-teal), var(--w-depth));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .icon-teal i {
+        color: white;
+        font-size: 1.5rem;
+    }
+    .honor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+    .honor-card {
+        background: rgba(255,255,255,0.3);
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        border: 1px solid rgba(255,255,255,0.8);
+        transition: var(--trans);
+    }
+    .honor-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-hover);
+    }
+    .honor-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+    .honor-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+    }
+    .honor-date {
+        font-size: 0.8rem;
+        color: var(--w-current);
+        margin-top: 0.2rem;
+    }
+    .honor-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--w-abyss);
+        margin-bottom: 0.5rem;
+    }
+    .honor-institution {
+        font-size: 0.85rem;
+        color: var(--w-teal);
+        margin-bottom: 0.3rem;
+    }
+    .honor-degree {
+        font-size: 0.8rem;
+        color: var(--w-current);
+    }
+    .honor-description {
+        font-size: 0.85rem;
+        color: var(--w-depth);
+        margin-top: 0.8rem;
+        line-height: 1.5;
+    }
+    .award-type {
+        background: rgba(255,215,0,0.2);
+    }
+    .scholarship-type {
+        background: rgba(192,192,192,0.2);
+    }
+    .honor-type {
+        background: rgba(205,127,50,0.2);
+    }
+    .timeline-container {
+        position: relative;
+        padding: 1rem 0;
+    }
+    .timeline-line {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--w-teal), #ffd700);
+        opacity: 0.3;
+    }
+    .timeline-items {
+        position: relative;
+        padding-left: 50px;
+    }
+    .timeline-item {
+        margin-bottom: 2rem;
+        position: relative;
+    }
+    .timeline-marker {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        position: absolute;
+        left: -35px;
+        top: 5px;
+    }
+    .marker-award {
+        background: #ffd700;
+        box-shadow: 0 0 0 3px rgba(255,215,0,0.3);
+    }
+    .marker-scholarship {
+        background: #c0c0c0;
+        box-shadow: 0 0 0 3px rgba(192,192,192,0.3);
+    }
+    .marker-honor {
+        background: #cd7f32;
+        box-shadow: 0 0 0 3px rgba(205,127,50,0.3);
+    }
+    .marker-event {
+        background: var(--w-teal);
+        box-shadow: 0 0 0 3px rgba(109,191,218,0.3);
+    }
+    .timeline-content {
+        background: rgba(255,255,255,0.3);
+        border-radius: var(--radius-md);
+        padding: 1.2rem;
+    }
+    .event-content {
+        background: rgba(255,255,255,0.2);
+        border: 1px dashed rgba(109,191,218,0.3);
+    }
+    .event-institution {
+        font-size: 0.8rem;
+        color: var(--w-teal);
+    }
+    .timeline-title {
+        font-weight: 600;
+        color: var(--w-abyss);
+    }
+    .timeline-subtitle {
+        color: var(--w-current);
+        font-size: 0.85rem;
+    }
+    .featured-achievement {
+        background: linear-gradient(145deg, rgba(255,215,0,0.1), rgba(255,255,255,0.3));
+    }
+    .featured-content {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .featured-icon-container {
+        text-align: center;
+    }
+    .featured-icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #ffd700, #ffed4e);
+        margin: 0 auto 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .featured-icon i {
+        color: #8B4513;
+        font-size: 3rem;
+    }
+    .featured-rank {
+        font-size: 2.5rem;
+    }
+    .featured-text {
+        max-width: 400px;
+    }
+    .featured-title {
+        font-family: 'DM Serif Display', serif;
+        font-size: 1.8rem;
+        color: var(--w-abyss);
+        margin-bottom: 0.5rem;
+    }
+    .featured-description {
+        color: var(--w-current);
+        line-height: 1.6;
+    }
+</style>
+{% endblock %}

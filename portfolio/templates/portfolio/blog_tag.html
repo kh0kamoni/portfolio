@@ -1,0 +1,113 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}#{{ tag.name }} — Blog · Khokamoni{% endblock %}
+
+{% block content %}
+<!-- HERO ──────────────────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-hashtag"></i>
+            Tag
+        </div>
+        <h1 class="hero-name">#{{ tag.name }}</h1>
+        <p class="hero-bio">
+            All blog posts tagged with "{{ tag.name }}".
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-tags" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- Tag Stats -->
+<div class="stats-row" style="margin-top: 2rem;">
+    <div class="stat-card glass">
+        <div class="stat-val">{{ posts.count }}</div>
+        <div class="stat-lbl">Posts with<br>#{{ tag.name }}</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">
+            <a href="{% url 'blog_list' %}" style="color: inherit; text-decoration: none;">← All Posts</a>
+        </div>
+        <div class="stat-lbl">Back to<br>Blog</div>
+    </div>
+</div>
+
+<!-- Posts Grid -->
+<section style="margin-top: 3rem;">
+    <div class="panel glass" style="padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <div style="width: 50px; height: 50px; border-radius: 1rem; background: linear-gradient(145deg, var(--w-teal), var(--w-depth)); display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-pen-fancy" style="color: white; font-size: 1.5rem;"></i>
+            </div>
+            <h2 class="sec-title" style="margin-bottom: 0;">Posts Tagged #{{ tag.name }}</h2>
+        </div>
+
+        {% if posts %}
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                {% for post in posts %}
+                <div class="blog-post-item" style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); padding: 1.5rem; border: 1px solid rgba(255,255,255,0.8);">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        {% if post.featured_image %}
+                        <div style="width: 120px; height: 120px; border-radius: var(--radius-md); overflow: hidden;">
+                            <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        {% endif %}
+                        <div style="flex: 1;">
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap;">
+                                <span class="pub-type" style="background: rgba(109,191,218,0.2);">{{ post.get_post_type_display }}</span>
+                                {% for cat in post.categories.all|slice:":2" %}
+                                <a href="{% url 'blog_category' cat.slug %}" class="pub-type" style="background: rgba(184,228,244,0.4); text-decoration: none;">{{ cat.name }}</a>
+                                {% endfor %}
+                            </div>
+                            <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.3rem;">
+                                <a href="{% url 'blog_detail' post.slug %}" style="text-decoration: none; color: inherit;">{{ post.title }}</a>
+                            </h3>
+                            <p style="font-size: 0.9rem; color: var(--w-depth); margin-bottom: 0.3rem;">{{ post.author.get_full_name|default:post.author.username }}</p>
+                            <p style="font-size: 0.85rem; color: var(--w-current); margin-bottom: 0.8rem;">{{ post.excerpt|truncatechars:120 }}</p>
+                            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                <span style="font-size: 0.75rem; color: var(--w-teal);">
+                                    <i class="fa-regular fa-calendar"></i> {{ post.published_date|date:"M d, Y" }}
+                                </span>
+                                <span style="font-size: 0.75rem; color: var(--w-current);">
+                                    <i class="fa-regular fa-clock"></i> {{ post.reading_time_minutes }} min read
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="pagination" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link">← Previous</a>
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="page-current">{{ num }}</span>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next →</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        {% else %}
+            <div style="text-align: center; padding: 3rem;">
+                <i class="fa-regular fa-hashtag" style="font-size: 3rem; color: var(--w-teal); opacity: 0.5;"></i>
+                <p style="color: var(--w-current); margin-top: 1rem;">No posts with this tag yet.</p>
+                <a href="{% url 'blog_list' %}" class="btn btn-ghost" style="margin-top: 1rem;">View All Posts</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

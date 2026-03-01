@@ -1,0 +1,458 @@
+{% load static %}
+<nav>
+    <div class="nav-inner">
+        <a href="{% url 'home' %}" class="nav-brand">
+            <span class="drop-icon"><i class="fa-solid fa-droplet"></i></span>
+            <span class="brand-name">Khokamoni</span>
+        </a>
+        
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+            <span class="menu-toggle__line menu-toggle__line--1"></span>
+            <span class="menu-toggle__line menu-toggle__line--2"></span>
+        </button>
+        
+        <!-- Navigation Links with Dropdowns -->
+        <ul class="nav-links" id="navLinks">
+            <!-- Research & Publications Dropdown -->
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle {% if request.resolver_match.url_name == 'research' or request.resolver_match.url_name == 'publications' or request.resolver_match.url_name == 'cve_list' or request.resolver_match.url_name == 'cve_detail' or request.resolver_match.url_name == 'projects' or request.resolver_match.url_name == 'project_detail' %}active{% endif %}">
+                    Research <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'research' %}" class="{% if request.resolver_match.url_name == 'research' %}active{% endif %}">Research Areas</a></li>
+                    <li><a href="{% url 'publications' %}" class="{% if request.resolver_match.url_name == 'publications' %}active{% endif %}">Publications</a></li>
+                    <li><a href="{% url 'cve_list' %}" class="{% if request.resolver_match.url_name == 'cve_list' or request.resolver_match.url_name == 'cve_detail' %}active{% endif %}">CVEs</a></li>
+                    <li><a href="{% url 'projects' %}" class="{% if request.resolver_match.url_name == 'projects' or request.resolver_match.url_name == 'project_detail' %}active{% endif %}">Projects</a></li>
+                </ul>
+            </li>
+            
+            <!-- Professional Dropdown -->
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle {% if request.resolver_match.url_name == 'experience' or request.resolver_match.url_name == 'affiliation' or request.resolver_match.url_name == 'academics' or request.resolver_match.url_name == 'achievements' %}active{% endif %}">
+                    Professional <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'experience' %}" class="{% if request.resolver_match.url_name == 'experience' %}active{% endif %}">Experience</a></li>
+                    <li><a href="{% url 'affiliation' %}" class="{% if request.resolver_match.url_name == 'affiliation' %}active{% endif %}">Affiliations</a></li>
+                    <li><a href="{% url 'academics' %}" class="{% if request.resolver_match.url_name == 'academics' %}active{% endif %}">Academics</a></li>
+                    <li><a href="{% url 'achievements' %}" class="{% if request.resolver_match.url_name == 'achievements' %}active{% endif %}">Achievements</a></li>
+                </ul>
+            </li>
+            
+            <!-- Learning Dropdown -->
+            <li class="dropdown">
+                <a href="javascript:void(0);" class="dropdown-toggle {% if request.resolver_match.url_name == 'mooc' or request.resolver_match.url_name == 'blog_list' or request.resolver_match.url_name == 'blog_detail' or request.resolver_match.url_name == 'blog_category' or request.resolver_match.url_name == 'blog_tag' or request.resolver_match.url_name == 'blog_series' %}active{% endif %}">
+                    Learning <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'mooc' %}" class="{% if request.resolver_match.url_name == 'mooc' %}active{% endif %}">MOOC Certifications</a></li>
+                    <li><a href="{% url 'blog_list' %}" class="{% if request.resolver_match.url_name == 'blog_list' or request.resolver_match.url_name == 'blog_detail' or request.resolver_match.url_name == 'blog_category' or request.resolver_match.url_name == 'blog_tag' or request.resolver_match.url_name == 'blog_series' %}active{% endif %}">Blog</a></li>
+                </ul>
+            </li>
+            
+            <!-- Contact (standalone) -->
+            <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<style>
+    /* Navbar Base Styles */
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        background: rgba(240, 250, 253, 0.72);
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        border-bottom: 1px solid rgba(255,255,255,0.80);
+        box-shadow: 0 2px 24px -8px rgba(13, 92, 118, 0.14);
+        width: 100%;
+    }
+
+    .nav-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    /* Brand Styles */
+    .nav-brand {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--w-depth);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+    }
+
+    .drop-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, var(--w-mid), var(--w-teal));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.7rem;
+        box-shadow: 0 4px 10px -4px rgba(42,143,175,0.5);
+    }
+
+    /* Desktop Navigation Links */
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        position: relative;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--w-current);
+        text-decoration: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 100px;
+        transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-block;
+        white-space: nowrap;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+    }
+
+    .nav-links a:hover {
+        background: rgba(255,255,255,0.6);
+        color: var(--w-depth);
+    }
+
+    .nav-links a.active {
+        background: rgba(255,255,255,0.6);
+        color: var(--w-depth);
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .dropdown-arrow {
+        font-size: 0.7rem;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 200px;
+        background: rgba(240, 250, 253, 0.95);
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        border-radius: 12px;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+        list-style: none;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(13,92,118,0.15);
+        border: 1px solid rgba(255,255,255,0.8);
+        z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-menu li {
+        width: 100%;
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+        border-radius: 0;
+        white-space: nowrap;
+        width: 100%;
+        text-align: left;
+    }
+
+    .dropdown-menu a:hover {
+        background: rgba(255,255,255,0.8);
+    }
+
+    .dropdown-menu a.active {
+        background: rgba(255,255,255,0.8);
+        font-weight: 600;
+    }
+
+    /* Mobile Menu Button */
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        position: relative;
+        z-index: 1001;
+        outline: none;
+    }
+
+    .menu-toggle__line {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: var(--w-depth);
+        border-radius: 2px;
+        margin: 0 auto;
+        position: absolute;
+        left: 9px;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .menu-toggle__line--1 {
+        top: 14px;
+    }
+
+    .menu-toggle__line--2 {
+        top: 24px;
+    }
+
+    .menu-toggle.open .menu-toggle__line--1 {
+        transform: rotate(45deg);
+        top: 19px;
+    }
+
+    .menu-toggle.open .menu-toggle__line--2 {
+        transform: rotate(-45deg);
+        top: 19px;
+    }
+
+    /* Tablet Styles */
+    @media (max-width: 1024px) {
+        .nav-links a {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.7rem;
+        }
+    }
+
+    @media (max-width: 900px) {
+        .nav-links a {
+            font-size: 0.75rem;
+            padding: 0.3rem 0.6rem;
+        }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+        .nav-inner {
+            padding: 0 1rem;
+        }
+
+        .menu-toggle {
+            display: block;
+        }
+
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 58px;
+            left: 0;
+            right: 0;
+            background: rgba(240, 250, 253, 0.98);
+            backdrop-filter: blur(20px) saturate(160%);
+            flex-direction: column;
+            align-items: stretch;
+            padding: 0.5rem 1rem 1.5rem;
+            gap: 0.3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 8px 32px rgba(13,92,118,0.15);
+            max-height: calc(100vh - 58px);
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        .nav-links li {
+            width: 100%;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            padding: 0.8rem 1rem;
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+
+        /* Mobile Dropdown Styles */
+        .dropdown-menu {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            background: rgba(255,255,255,0.3);
+            box-shadow: none;
+            margin: 0.3rem 0 0.3rem 1rem;
+            padding: 0.3rem 0;
+            border: 1px solid rgba(255,255,255,0.5);
+            display: none;
+        }
+
+        .dropdown.open .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-toggle .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.open .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu a {
+            font-size: 0.85rem;
+            padding: 0.6rem 1.5rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        // Mobile menu toggle
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('show');
+                menuToggle.classList.toggle('open');
+                
+                if (navLinks.classList.contains('show')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                    // Close all dropdowns when closing mobile menu
+                    document.querySelectorAll('.dropdown').forEach(drop => {
+                        drop.classList.remove('open');
+                    });
+                }
+            });
+        }
+        
+        // Mobile dropdown toggles
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const dropdown = this.closest('.dropdown');
+                    dropdown.classList.toggle('open');
+                });
+            });
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth > 768) return;
+            
+            if (!navLinks.contains(event.target) && 
+                !menuToggle.contains(event.target) && 
+                navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+                menuToggle.classList.remove('open');
+                document.body.style.overflow = '';
+                
+                document.querySelectorAll('.dropdown').forEach(drop => {
+                    drop.classList.remove('open');
+                });
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                if (navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    menuToggle.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+                
+                // Reset mobile dropdown states
+                document.querySelectorAll('.dropdown').forEach(drop => {
+                    drop.classList.remove('open');
+                });
+            } else {
+                // Re-attach mobile dropdown handlers
+                document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                    toggle.removeEventListener('click', function() {});
+                    toggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const dropdown = this.closest('.dropdown');
+                        dropdown.classList.toggle('open');
+                    });
+                });
+            }
+        });
+        
+        // Handle escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (navLinks.classList.contains('show')) {
+                    navLinks.classList.remove('show');
+                    menuToggle.classList.remove('open');
+                    document.body.style.overflow = '';
+                    
+                    document.querySelectorAll('.dropdown').forEach(drop => {
+                        drop.classList.remove('open');
+                    });
+                }
+            }
+        });
+    });
+</script>

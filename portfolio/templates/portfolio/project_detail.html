@@ -1,0 +1,159 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} — Khokamoni{% endblock %}
+
+{% block content %}
+<!-- PROJECT HERO ───────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-flask"></i>
+            <a href="{% url 'projects' %}" style="color: inherit; text-decoration: none;">Projects</a> / Details
+        </div>
+        <h1 class="hero-name">{{ project.title }}</h1>
+        {% if project.subtitle %}
+        <p style="font-size: 1.1rem; color: var(--w-teal); margin-bottom: 0.5rem;">{{ project.subtitle }}</p>
+        {% endif %}
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <span class="tag">
+                <i class="fa-regular fa-calendar"></i> {{ project.project_date|default:project.end_date|date:"F Y" }}
+            </span>
+            <span class="tag" style="background: {% if project.status == 'completed' %}rgba(109,191,218,0.2){% else %}rgba(255,215,0,0.2){% endif %};">
+                <i class="fa-regular fa-circle-check"></i> {{ project.get_status_display }}
+            </span>
+        </div>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-cube" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- PROJECT CONTENT ─────────────────────────────────── -->
+<div class="two-col" style="margin-top: 2rem;">
+    <!-- Main Content -->
+    <div>
+        <div class="panel glass">
+            <p class="sec-eye">Project Overview</p>
+            <h2 class="sec-title">Description</h2>
+            <div style="font-size: 0.98rem; line-height: 1.8; color: #1e5469;">
+                {{ project.description|linebreaks }}
+            </div>
+
+            {% if project.methods %}
+            <hr class="divider" />
+            <p class="sec-eye" style="margin-bottom: 0.5rem;">Methods & Tools</p>
+            <div class="chips">
+                {% for method in project.get_methods_list %}
+                <span class="chip">{{ method }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        {% if project.additional_images.all %}
+        <div class="panel glass" style="margin-top: 1.5rem;">
+            <p class="sec-eye">Gallery</p>
+            <h2 class="sec-title">Project Images</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                {% for img in project.additional_images.all %}
+                <div style="border-radius: var(--radius-md); overflow: hidden;">
+                    <img src="{{ img.image.url }}" alt="{{ img.caption|default:project.title }}" style="width: 100%; height: 150px; object-fit: cover;">
+                    {% if img.caption %}
+                    <p style="font-size: 0.75rem; color: var(--w-current); margin-top: 0.3rem; text-align: center;">{{ img.caption }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Sidebar -->
+    <div>
+        {% if project.image %}
+        <div class="panel glass" style="padding: 1rem;">
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" style="width: 100%; border-radius: var(--radius-md);">
+        </div>
+        {% endif %}
+
+        <div class="panel glass" style="margin-top: 1.5rem;">
+            <p class="sec-eye">Resources</p>
+            <h2 class="sec-title">Links & Files</h2>
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                {% if project.doi %}
+                <a href="{{ project.doi }}" target="_blank" class="clink" style="justify-content: flex-start;">
+                    <i class="fa-regular fa-file-lines"></i> DOI: {{ project.doi|truncatechars:40 }}
+                </a>
+                {% endif %}
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" class="clink" style="justify-content: flex-start;">
+                    <i class="fa-brands fa-github"></i> GitHub Repository
+                </a>
+                {% endif %}
+                {% if project.presentation_url %}
+                <a href="{{ project.presentation_url }}" target="_blank" class="clink" style="justify-content: flex-start;">
+                    <i class="fa-regular fa-file-powerpoint"></i> Presentation
+                </a>
+                {% endif %}
+                {% if project.pdf_file %}
+                <a href="{{ project.pdf_file.url }}" target="_blank" class="clink" style="justify-content: flex-start;">
+                    <i class="fa-regular fa-file-pdf"></i> Download PDF
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if project.collaborators.all %}
+        <div class="panel glass" style="margin-top: 1.5rem;">
+            <p class="sec-eye">Team</p>
+            <h2 class="sec-title">Collaborators</h2>
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                {% for collab in project.collaborators.all %}
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(145deg, var(--w-shallow), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                        <i class="fa-regular fa-user" style="color: var(--w-depth);"></i>
+                    </div>
+                    <div>
+                        <p style="font-weight: 600; color: var(--w-abyss);">{{ collab.name }}</p>
+                        {% if collab.institution %}
+                        <p style="font-size: 0.75rem; color: var(--w-current);">{{ collab.institution }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- BACK TO PROJECTS -->
+<section style="margin-top: 2rem; text-align: center;">
+    <a href="{% url 'projects' %}" class="btn btn-ghost">
+        <i class="fa-solid fa-arrow-left"></i> Back to All Projects
+    </a>
+</section>
+
+<!-- RELATED PROJECTS -->
+{% if related_projects %}
+<section style="margin-top: 3rem;">
+    <div class="panel glass">
+        <p class="sec-eye">Explore More</p>
+        <h2 class="sec-title">Related Projects</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            {% for related in related_projects %}
+            <div style="background: rgba(255,255,255,0.2); border-radius: var(--radius-md); padding: 1.2rem; border: 1px solid rgba(255,255,255,0.8);">
+                <h3 style="font-size: 1rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.3rem;">
+                    <a href="{% url 'project_detail' related.slug %}" style="text-decoration: none; color: inherit;">
+                        {{ related.title }}
+                    </a>
+                </h3>
+                <p style="font-size: 0.8rem; color: var(--w-current);">{{ related.project_date }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

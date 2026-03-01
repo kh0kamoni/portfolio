@@ -1,0 +1,160 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Projects — Khokamoni{% endblock %}
+
+{% block content %}
+<!-- HERO ──────────────────────────────────────────────── -->
+<section class="hero glass" style="padding: 2.5rem 3rem;">
+    <div class="hero-text">
+        <div class="hero-eyebrow">
+            <i class="fa-solid fa-flask"></i>
+            Research Projects
+        </div>
+        <h1 class="hero-name">Featured<br><em>Projects</em></h1>
+        <p class="hero-bio">
+            A collection of research projects in computational fluid dynamics, 
+            thermal management, and energy systems. Each project demonstrates 
+            the application of advanced simulation techniques and experimental validation.
+        </p>
+    </div>
+    <div class="hero-avatar" style="background: linear-gradient(145deg, var(--w-teal), var(--w-depth));">
+        <span><i class="fa-solid fa-microscope" style="color: white; font-size: 2rem;"></i></span>
+    </div>
+</section>
+
+<!-- PROJECT STATS ──────────────────────────────────── -->
+<div class="stats-row" style="margin-top: 2rem;">
+    <div class="stat-card glass">
+        <div class="stat-val">{{ projects.count }}</div>
+        <div class="stat-lbl">Total<br>Projects</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">{{ featured_projects.count }}</div>
+        <div class="stat-lbl">Featured<br>Research</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">CFD</div>
+        <div class="stat-lbl">Primary<br>Method</div>
+    </div>
+    <div class="stat-card glass">
+        <div class="stat-val">COMSOL</div>
+        <div class="stat-lbl">Key<br>Software</div>
+    </div>
+</div>
+
+<!-- PROJECTS GRID ──────────────────────────────────── -->
+<section style="margin-top: 3rem;">
+    <div class="panel glass" style="padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+            <div style="width: 50px; height: 50px; border-radius: 1rem; background: linear-gradient(145deg, var(--w-teal), var(--w-depth)); display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-cube" style="color: white; font-size: 1.5rem;"></i>
+            </div>
+            <h2 class="sec-title" style="margin-bottom: 0;">All Projects</h2>
+        </div>
+
+        <!-- Projects Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem;">
+            {% for project in projects %}
+            <div class="project-card" style="background: rgba(255,255,255,0.3); border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255,255,255,0.8); transition: var(--trans);">
+                {% if project.image %}
+                <div style="height: 200px; overflow: hidden;">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                </div>
+                {% else %}
+                <div style="height: 200px; background: linear-gradient(145deg, var(--w-shallow), var(--w-teal)); display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-flask" style="font-size: 3rem; color: var(--w-depth); opacity: 0.5;"></i>
+                </div>
+                {% endif %}
+                
+                <div style="padding: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <span class="pub-type" style="background: {% if project.status == 'completed' %}rgba(109,191,218,0.2){% else %}rgba(255,215,0,0.2){% endif %};">
+                            {{ project.get_status_display }}
+                        </span>
+                        <span style="font-size: 0.75rem; color: var(--w-current);">
+                            <i class="fa-regular fa-calendar"></i> {{ project.project_date|default:project.end_date|date:"M Y" }}
+                        </span>
+                    </div>
+                    
+                    <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--w-abyss); margin-bottom: 0.5rem; line-height: 1.3;">
+                        <a href="{% url 'project_detail' project.slug %}" style="text-decoration: none; color: inherit;">
+                            {{ project.title }}
+                        </a>
+                    </h3>
+                    
+                    {% if project.subtitle %}
+                    <p style="font-size: 0.85rem; color: var(--w-teal); margin-bottom: 0.8rem;">{{ project.subtitle }}</p>
+                    {% endif %}
+                    
+                    <p style="font-size: 0.9rem; color: var(--w-current); line-height: 1.5; margin-bottom: 1rem;">
+                        {{ project.short_description|default:project.description|truncatechars:150 }}
+                    </p>
+                    
+                    {% if project.methods %}
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1rem;">
+                        {% for method in project.get_methods_list|slice:":3" %}
+                        <span class="chip" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">{{ method }}</span>
+                        {% endfor %}
+                        {% if project.get_methods_list|length > 3 %}
+                        <span class="chip" style="font-size: 0.7rem; padding: 0.15rem 0.5rem;">+{{ project.get_methods_list|length|add:"-3" }}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <a href="{% url 'project_detail' project.slug %}" class="btn btn-ghost" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
+                            <i class="fa-regular fa-eye"></i> Details
+                        </a>
+                        {% if project.doi %}
+                        <a href="{{ project.doi }}" target="_blank" class="btn btn-ghost" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
+                            <i class="fa-regular fa-file-lines"></i> DOI
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p style="color: var(--w-current); grid-column: 1/-1; text-align: center; padding: 3rem;">
+                No projects found.
+            </p>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="pagination" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 3rem;">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link" style="padding: 0.5rem 1rem; border-radius: var(--radius-pill); background: rgba(255,255,255,0.5); color: var(--w-depth); text-decoration: none; border: 1px solid rgba(255,255,255,0.8);">
+                    <i class="fa-solid fa-chevron-left"></i> Previous
+                </a>
+            {% endif %}
+            
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <span class="page-current" style="padding: 0.5rem 1rem; background: var(--w-teal); color: white; border-radius: var(--radius-pill);">{{ num }}</span>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="page-link" style="padding: 0.5rem 1rem; border-radius: var(--radius-pill); background: rgba(255,255,255,0.5); color: var(--w-depth); text-decoration: none; border: 1px solid rgba(255,255,255,0.8);">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link" style="padding: 0.5rem 1rem; border-radius: var(--radius-pill); background: rgba(255,255,255,0.5); color: var(--w-depth); text-decoration: none; border: 1px solid rgba(255,255,255,0.8);">
+                    Next <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-hover);
+    }
+    .project-card:hover img {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
