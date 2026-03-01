@@ -13,14 +13,31 @@ ENV/
 .env
 .venv
 
-# Media/Uploaded Files
+# Media Files - Images in all folders
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.gif
+**/*.pdf
+**/*.svg
+**/*.ico
+
+# Specific image folders
+blog/banners/
+blog/images/
+institutions/
+mooc/certificates/
+mooc/images/
+mooc/logos/
 profile/
 transcripts/
-media/
-uploads/
-mooc/
-institutions/
-blog/
+
+# Individual image files (if any in root)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.pdf
 
 # Static Files
 static/
@@ -41,7 +58,6 @@ Thumbs.db
 *.so
 .Python
 pip-log.txt
-db.sqlite3
 pip-delete-this-directory.txt
 .pytest_cache/
 .coverage
@@ -52,11 +68,15 @@ htmlcov/
 dist/
 build/
 
-# Django Migrations - Uncomment later after first commit
-# portfolio/migrations/
-# blog/migrations/
-# institutions/migrations/
-# mooc/migrations/
+# Django Migrations - Keep these if they exist
+portfolio/migrations/
+blog/migrations/
+institutions/migrations/
+mooc/migrations/
+!portfolio/migrations/__init__.py
+!blog/migrations/__init__.py
+!institutions/migrations/__init__.py
+!mooc/migrations/__init__.py
 
 # Secrets
 .env
@@ -64,9 +84,10 @@ build/
 *.pem
 secrets.json
 
-# Project specific exclusions
-khoka_portfolio/__pycache__/
-portfolio/__pycache__/
-blog/__pycache__/
-institutions/__pycache__/
-mooc/__pycache__/
+# Cache
+**/__pycache__/
+*.pyc
+
+# OS
+Thumbs.db
+.DS_Store
