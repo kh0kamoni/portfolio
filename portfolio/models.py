@@ -16,7 +16,6 @@ class Profile(models.Model):
     orcid_id = models.URLField(blank=True)
     linkedin_url = models.URLField(blank=True)
     github_url = models.URLField(blank=True)
-    github_url = models.URLField(blank=True)
     google_scholar_url = models.URLField(blank=True)
     cv_file = models.FileField(upload_to='cv/', blank=True, null=True)
     

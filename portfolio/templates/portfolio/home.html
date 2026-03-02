@@ -11,12 +11,6 @@
         </div>
         <h1 class="hero-name">Hi, I'm Khoka!<br><em><small>Welcome to my corner of the web.</small></em></h1>
         <p class="hero-bio">{{ profile.bio }}</p>
-        <!-- <div class="hero-tags">
-            <span class="tag"><i class="fa-regular fa-graduation-cap"></i> 1st-Year  </span>
-            <span class="tag"><i class="fa-solid fa-building-columns"></i>  Alumnus</span>
-            <span class="tag"><i class="fa-regular fa-person-chalkboard"></i> ex-Adjunct Faculty</span>
-            <span class="tag"><i class="fa-brands fa-orcid"></i> ORCID</span>
-        </div> -->
         <div class="hero-cta">
             <a href="{% url 'publications' %}" class="btn btn-primary">
                 <i class="fa-regular fa-file-lines"></i> Publications
@@ -39,7 +33,7 @@
             <span style="font-family: 'DM Serif Display', serif; font-size: 2.2rem; font-weight: 400; color: var(--w-depth);">SDS</span>
         </div>
     {% endif %}
-</div>
+    </div>
 </section>
 
 <!-- STATS ──────────────────────────────────────────────── -->
@@ -151,22 +145,17 @@
             <a href="{{ profile.github_url }}" class="clink">
                 <i class="fa-brands fa-github"></i> GitHub
             </a>
-
+            {% endif %}
             {% if profile.orcid_id %}
             <a href="{{ profile.orcid_id }}" class="clink">
                 <i class="fa-brands fa-orcid"></i> ORCID
             </a>
-            {% endif %}
-
             {% endif %}
             {% if profile.cv_file %}
             <a href="{{ profile.cv_file.url }}" class="clink">
                 <i class="fa-regular fa-file-pdf"></i> Download CV
             </a>
             {% endif %}
-
-            
-            
         </div>
     </div>
 </section>
