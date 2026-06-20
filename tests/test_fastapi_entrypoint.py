@@ -1,4 +1,8 @@
+import os
+
 from fastapi.testclient import TestClient
+
+os.environ.setdefault("DJANGO_SECRET_KEY", "test-secret-key")
 
 from app.main import app
 
