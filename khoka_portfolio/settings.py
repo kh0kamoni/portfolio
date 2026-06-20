@@ -25,7 +25,7 @@ extra_allowed_hosts = os.getenv("DJANGO_ALLOWED_HOSTS", "")
 if extra_allowed_hosts:
     ALLOWED_HOSTS.extend([host.strip() for host in extra_allowed_hosts.split(",") if host.strip()])
 if DEBUG:
-    ALLOWED_HOSTS.extend(["0.0.0.0", "::1"])
+    ALLOWED_HOSTS.append("::1")
 
 CSRF_TRUSTED_ORIGINS = [
     "https://khoka.engineer",
