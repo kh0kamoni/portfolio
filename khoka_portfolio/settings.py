@@ -13,11 +13,11 @@ ALLOWED_HOSTS = [
     "khokamoni.duckdns.org",
     "127.0.0.1",
     "localhost",
-    "192.168.0.183",
-    "192.168.0.171",
-    "103.152.107.137",
     "testserver",
 ]
+extra_allowed_hosts = os.getenv("DJANGO_ALLOWED_HOSTS", "")
+if extra_allowed_hosts:
+    ALLOWED_HOSTS.extend([host.strip() for host in extra_allowed_hosts.split(",") if host.strip()])
 if DEBUG:
     ALLOWED_HOSTS.extend(["0.0.0.0", "::1"])
 
