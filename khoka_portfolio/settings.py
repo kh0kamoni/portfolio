@@ -19,7 +19,7 @@ ALLOWED_HOSTS = [
     "testserver",
 ]
 if DEBUG:
-    ALLOWED_HOSTS.append("*")
+    ALLOWED_HOSTS.extend(["0.0.0.0", "::1"])
 
 CSRF_TRUSTED_ORIGINS = [
     "https://khoka.engineer",
