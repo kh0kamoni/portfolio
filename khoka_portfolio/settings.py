@@ -16,6 +16,7 @@ ALLOWED_HOSTS = [
     "192.168.0.183",
     "192.168.0.171",
     "103.152.107.137",
+    "testserver",
 ]
 if DEBUG:
     ALLOWED_HOSTS.append("*")
@@ -98,7 +99,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "portfolio" / "static"]
+STATICFILES_DIRS = []
+_default_static_dir = BASE_DIR / "portfolio" / "static"
+if _default_static_dir.exists():
+    STATICFILES_DIRS.append(_default_static_dir)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
